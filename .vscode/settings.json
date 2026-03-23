@@ -1,0 +1,15 @@
+{
+    "cSpell.words": [
+        "contienen",
+        "cuencas",
+        "datos",
+        "idxs",
+        "índices",
+        "nanmean",
+        "nanstd",
+        "nansum",
+        "tendencymeans"
+    ],
+    "python-envs.defaultEnvManager": "ms-python.python:conda",
+    "python-envs.defaultPackageManager": "ms-python.python:conda"
+}
