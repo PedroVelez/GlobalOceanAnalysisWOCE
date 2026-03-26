@@ -1,6 +1,13 @@
 
+- Identificar sección de los datos crudos:
+    La función get_Section_files.py , analiza la carpeta .Data/direct_downloads cuando está estaba sin clasificar los archivos por secciones. Te devuelve y clasifica los archivos en carpetas por secciones
+
+-Datos nuevos:
+    En el fichero Datos nuevos.txt, se encontrarán los archivos descargados que fueron añadidos en marzo de 2026
+
 - Leer datos y tabla: ReadOriginalData.py
-    ./Data/direct_downloads/, están las las descargas crudas de internet, para corregirlas tienes que usar la función correct_sections() en data.py.
+    ./Data/direct_downloads/, están las las descargas crudas de internet, para corregirlas tienes que usar la función correct_sections() en data.py. Está función emplea la variable 'section_id' de los archivos netcdf para su clasificación por secciones. Los valores de latitud y longitud que no pertenezcan a secciones de interés son recortados, dejando únicamente los datos de secciones puras. Con respecto a las variables aplica un filtro de control de calidad con etiqueta 2 (Buenas calidad) para usar solo medidas eficientes. De entre todos los posibles nombres de salinidad, se queda con el que corresponde y recorta para que los datos de salinidad esten solo entre 30 y 40 en sus respectivas unidades. Si existe la variable 'ctd_temperature-68' la convierte a grados celsius dividiendo entre 1.00024. Extrae los años de muestreo del archivo y los usas para los nombres de los ficheros de secciones corregidas. También crea un fichero .csv con nombres de los ficheros, su sección, año y referencia.
+    
 - Diagramas TS y mapa: plotTS.py
  - Versión filtrada: aplicaFiltroHanning.ipynb
 - Unir todas los datos en una matriz -  uneCruises.ipynb.
