@@ -17,3 +17,4 @@ Data/*
 .ipynb_checkpoints/*
 dask-worker-space/*
 Mejoras/.ipynb_checkpoints/*
+.vscode/*
