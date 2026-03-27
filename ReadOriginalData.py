@@ -13,6 +13,50 @@ from tqdm import tqdm
 import gsw
 import glob
 
+# Creamos un diccionario con los comentarios oportunos para cada archivo
+# Fichero : Comentario
+comments ={
+    "64PE20000926_ctd.nc" : "Compartida con AR07, pero section_id =[A1E/AR7E],etiquetarda como A01",
+    "5_58GS20150410_ctd.nc" : "Única pero section_id estaba mal",
+    "31RBOACES24N_2_ctd.nc" : "Compartida con AR01, pero section_id = [AR01], etiqueda como A05",
+    "29AH20110128_ctd.nc" : "Única pero section_id estaba mal",
+    "6_74EQ20220209_ctd.nc" : "Única pero section_id estaba mal",
+    "740H20090307_ctd.nc" : "Compartida con A09 Y A09.5, pero section_id = [A095], etiquetada como A10",
+    "740H20180228_ctd.nc" : "Compartida con A09 Y A09.5, pero section_id = [A09.5-245], etiquetrda como A10",
+    "None_ctd.nc" : "Única per section_id estaba mal",
+    "06AQ19941123_ctd.nc" : "Compartida con A23, pero section_id estaba mal, etiquetada como A12",
+    "06AQ20060825_ctd.nc" : "Compartida con A21, pero section_id estaba mal, etiquetada como A12",
+    "316N19840111_ctd.nc" : "A13.5, pero section_id = [AJAX]",
+    "316N19831007_ctd.nc" : "A13.5, pero section_id = [AJAX]",
+    "35A3CITHER3_2_ctd.nc" : "A13.5, pero section_id = [AJAX]",
+    "3175MB93_ctd.nc" : "Compartida con AR21, pero section_id = [AR21b], etiquetada como A16",
+    "74JC10_1_ctd.nc" : "Compartida con A23, pero section_id = [A23], etiquetada como A16",
+    "74DI233_ctd.nc" : "Compartida con AR21, pero section_id = [AR21], etiquetada como A16",
+    "74JC19990315_ctd.nc" : "Compartida con A23 y ALBATROSS , pero section_id = [ALBATROSS], etiquetada como A16",
+    "09FA20000926_ctd.nc" : "Compartida con I05, I10 e ISSO3, pero section_id = [I02], etiquetada como I05",
+    "49NZ20140717_ctd.nc" : "P10, pero section_id estaba mal",
+    "33RR20180918_ctd.nc" : "P16, pero section_id estaba mal",
+    "325020131025_ctd.nc" : "P21, pero section_id estaba mal",
+    "74DI200_1_ctd.nc" : "S04, pero section_id estaba mal",
+    "09A9604_1_ctd.nc" : "Contiene SO4, pero section_id = [AURORA96, SR03], etiquetada como SRO3 ",
+    "490S20181205_ctd.nc" : "S04, pero section_id estaba mal",
+    "490S20190121_ctd.nc" : "S04, pero section_id estaba mal",
+    "09AR9309_1_ctd.nc" : "SR03, pero section_id estaba mal",
+    "09AR9407_1_ctd.nc" : "SR03, pero section_id estaba mal",
+    "35PK20140515_ctd.nc" : "Compartido con A25 Y OVIDE, pero no tiene section_id, etiquetada con A01",
+    "06AQ20080210_ctd.nc" : "No contiene la variable section_id",
+    "35MF20080207_ctd.nc" : "No contiene la variable section_id",
+    "1985_31TTTPS24_2.nc" : "No contiene la variable section_id"
+}
+
+# variables que tienen nombre cambiado
+section_rename = {
+    "I05" : "I5",
+    "I09S" : "I9S",
+    "P01" : "P1",
+    "S04" : "S4"
+}
+
 
 def vars_coords_interest(
         dataset : xr.core.dataset.Dataset,
@@ -74,11 +118,23 @@ def save_fmt(
     :param path: directory
     """
     with open(f"./Data/data.csv", "w") as f:
-        f.write(f"Fichero,Sección,Año,Ref,qcs\n")
+        f.write(f"Fichero,Sección,Año,Ref,comment\n")
         for section in sorted(os.listdir(path)):
             print(path+section)
             for file_ in glob.glob(path + "/" + section + "/*.nc"):
                 f_path = file_
+                ds = xr.load_dataset(f_path)
+                attrs = ds.attrs
+                if "correction_comment" in attrs:
+                    years = get_years(f_path)
+                    ds = xr.load_dataset(f_path)
+                    exist_ctd = "ctd_temperature" in ds.data_vars
+                    vars_, coords, qcs = vars_coords_interest(ds)
+                    if type(years) == list:
+                        for i in range(len(years)):
+                            f.write(f"{file_}, {section}, {years[i]}, {str(ds.ctd_temperature.reference_scale) if exist_ctd else str(0)}, {attrs['correction_comment']} \n")
+                    else:
+                        f.write(f"{file_}, {section}, {years}, {str(ds.ctd_temperature.reference_scale) if exist_ctd else str(0)} \n")
                 #print(file_)
                 try:
                     assert f_path.endswith(".nc")
@@ -116,20 +172,50 @@ def correct_sections(
         for f in os.listdir(src_path + section + "/"):
             f_path = src_path + section + "/" + f
             if f_path.endswith('.nc'):
-                print(f"Correcting {section}....")
-                if f_path.endswith('.nc'):
+                print(f"Correcting {f}....")
+                if f in comments:
+                    comentario = comments.get(f)
                     ds = xr.open_dataset(f_path)
                     vars_, coords, qcs = vars_coords_interest(dataset = ds)
-        
-                    try:
-                       assert "section_id" in ds.data_vars
-                    except AssertionError:
-                        continue
+
+                    ds = ds.where(np.isnan(ds.latitude) == False).where(np.isnan(ds.longitude) == False)
+                    for qc in qcs:
+                        if "temperature" in qc:
+                            ds = ds.where(ds[qc] == 2)
                 
+                    for salinity in ["ctd_salinity", "ctd_salinity_unk", "ctd_salinity_filt", "ctd_salinity_68"]:
+                        if salinity in vars_:
+                            sal = salinity
+                
+                    ds = ds.where(ds[sal] >= 30).where(ds[sal] <= 40)
+                    if "ctd_temperature_68" in vars_:
+                        ds["ctd_temperature_68"] = ds["ctd_temperature_68"] / 1.00024
+
+                    ds["section_id"] = section # Añadimos section_id y ponemos misma sección
+                    ds.attrs["correction_comment"] = comentario # Añadimos el comentario en los artibutos
+
+                    if os.path.exists(dst_path + section + "/") == False: os.mkdir(dst_path + section + "/")
+                    years = get_years(f_path)
+                    if type(years) != list:
+                        ds.to_netcdf(dst_path + section + "/" + years + "_" + f)
+                    else:
+                        years_ = ""
+                        for year in years:
+                            years_ += year + "_"
+                            ds.to_netcdf(dst_path + section + "/" + years_ + f)
+                
+                else:    
+                    ds = xr.open_dataset(f_path)
+                    vars_, coords, qcs = vars_coords_interest(dataset = ds)
+
                     for i in range(len(ds["section_id"])):
                         if section not in ds["section_id"].values[i]:
-                            ds.longitude[i] = np.nan
-                            ds.latitude[i] = np.nan
+                            newsection = section_rename.get(section)
+                            if newsection is not None:
+                                if newsection not in ds["section_id"].values[i]:
+                                    ds.longitude[i] = np.nan
+                                    ds.latitude[i] = np.nan
+    
 
                     ds = ds.where(np.isnan(ds.latitude) == False).where(np.isnan(ds.longitude) == False)
                     for qc in qcs:
@@ -156,43 +242,11 @@ def correct_sections(
             print("Done!\n")
 
 
-secs_interest = [
-        "A01",
-        "A05",
-        "A02",
-        "A10",
-        "A12",
-        "A13.5",
-        "A16",
-        "A20",
-        "A22",
-        "I03",
-        "I04",
-        "I05",
-        "I06",
-        "I08",
-        "I09",
-        "I08/I09"
-        "I09S",
-        "P01",
-        "P02",
-        "P03",
-        "P06",
-        "P10",
-        "P14",
-        "P15",
-        "P16",
-        "P17",
-        "P18",
-        "P21",
-        "SR03",
-        "S04"        
-    ]
 
 if __name__ == "__main__":
 
     correct_sections(src_path = "./Data/direct_downloads/",dst_path = "./Data/corrected_sections/")
-    save_fmt('./Data/corrected_sections')
+    #save_fmt('./Data/corrected_sections')
 
     
             
