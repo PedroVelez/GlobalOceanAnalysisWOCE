@@ -1,11 +1,11 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-file_in = './Cuencas/SouthMadagascar.csv'
-file_out = './Cuencas/SouthMadagascarNEUVO.csv'
+file_in = './Cuencas/SACentralAntartica.csv'
+file_out = './Cuencas/SACentralAntarticaNUEVO.csv'
 
-file_bg1 = './Cuencas/SACentralAntartica.csv'
-file_bg2 = './Cuencas/SouthAfrica.csv'
+file_bg1 = './Cuencas/SouthAfrica.csv'
+file_bg2 = './Cuencas/SAEastNamibia.csv'
 
 
 df = pd.read_csv(file_in)
