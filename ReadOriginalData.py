@@ -202,7 +202,7 @@ def correct_sections(
                         years_ = ""
                         for year in years:
                             years_ += year + "_"
-                            ds.to_netcdf(dst_path + section + "/" + years_ + f)
+                        ds.to_netcdf(dst_path + section + "/" + years_ + f)
                 
                 else:    
                     ds = xr.open_dataset(f_path)
