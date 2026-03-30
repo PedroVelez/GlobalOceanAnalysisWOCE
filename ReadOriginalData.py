@@ -118,7 +118,7 @@ def save_fmt(
     :param path: directory
     """
     with open(f"./Data/data.csv", "w") as f:
-        f.write(f"Fichero,Sección,Año,Ref,comment\n")
+        f.write(f"File:Section:year:Ref:comment\n")
         for section in sorted(os.listdir(path)):
             print(path+section)
             for file_ in glob.glob(path + "/" + section + "/*.nc"):
@@ -132,9 +132,9 @@ def save_fmt(
                     vars_, coords, qcs = vars_coords_interest(ds)
                     if type(years) == list:
                         for i in range(len(years)):
-                            f.write(f"{file_}, {section}, {years[i]}, {str(ds.ctd_temperature.reference_scale) if exist_ctd else str(0)}, {attrs['correction_comment']} \n")
+                            f.write(f"{file_}, {section}, {years[i]}, {str(ds.ctd_temperature.reference_scale) if exist_ctd else str(0)}, {attrs["correction_comment"]} \n")
                     else:
-                        f.write(f"{file_}, {section}, {years}, {str(ds.ctd_temperature.reference_scale) if exist_ctd else str(0)} \n")
+                        f.write(f"{file_}: {section}: {years}: {str(ds.ctd_temperature.reference_scale) if exist_ctd else str(0)}, {attrs['correction_comment']} \n")
                 #print(file_)
                 try:
                     assert f_path.endswith(".nc")
@@ -144,7 +144,7 @@ def save_fmt(
                     vars_, coords, qcs = vars_coords_interest(ds)
                     if type(years) == list:
                         for i in range(len(years)):
-                            f.write(f"{file_}, {section}, {years[i]}, {str(ds.ctd_temperature.reference_scale) if exist_ctd else str(0)} \n")
+                            f.write(f"{file_}: {section}: {years[i]}: {str(ds.ctd_temperature.reference_scale) if exist_ctd else str(0)} \n")
                     else:
                         f.write(f"{file_}, {section}, {years}, {str(ds.ctd_temperature.reference_scale) if exist_ctd else str(0)} \n")
                 except AssertionError:
@@ -245,8 +245,8 @@ def correct_sections(
 
 if __name__ == "__main__":
 
-    correct_sections(src_path = "./Data/direct_downloads/",dst_path = "./Data/corrected_sections/")
-    #save_fmt('./Data/corrected_sections')
+    #correct_sections(src_path = "./Data/direct_downloads/",dst_path = "./Data/corrected_sections/")
+    save_fmt('./Data/corrected_sections')
 
     
             
