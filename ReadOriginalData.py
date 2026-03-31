@@ -26,13 +26,13 @@ comments ={
     "None_ctd.nc" : "Única per section_id estaba mal",
     "06AQ19941123_ctd.nc" : "Compartida con A23, pero section_id estaba mal, etiquetada como A12",
     "06AQ20060825_ctd.nc" : "Compartida con A21, pero section_id estaba mal, etiquetada como A12",
-    "316N19840111_ctd.nc" : "A13.5, pero section_id = [AJAX]",
-    "316N19831007_ctd.nc" : "A13.5, pero section_id = [AJAX]",
+    "316N19840111_ctd.nc" : "A13.5, pero section_id = [AJAX], qc = 1 = no calibrado",
+    "316N19831007_ctd.nc" : "A13.5, pero section_id = [AJAX],  qc = 1 = no calibrado",
     "35A3CITHER3_2_ctd.nc" : "A13.5, pero section_id = [AJAX]",
     "3175MB93_ctd.nc" : "Compartida con AR21, pero section_id = [AR21b], etiquetada como A16",
     "74JC10_1_ctd.nc" : "Compartida con A23, pero section_id = [A23], etiquetada como A16",
     "74DI233_ctd.nc" : "Compartida con AR21, pero section_id = [AR21], etiquetada como A16",
-    "74JC19990315_ctd.nc" : "Compartida con A23 y ALBATROSS , pero section_id = [ALBATROSS], etiquetada como A16",
+    "74JC19990315_ctd.nc" : "Compartida con A23 y ALBATROSS , pero section_id = [ALBATROSS], etiquetada como A16, qc = 0 = no se asigno",
     "09FA20000926_ctd.nc" : "Compartida con I05, I10 e ISSO3, pero section_id = [I02], etiquetada como I05",
     "49NZ20140717_ctd.nc" : "P10, pero section_id estaba mal",
     "33RR20180918_ctd.nc" : "P16, pero section_id estaba mal",
@@ -46,7 +46,9 @@ comments ={
     "35PK20140515_ctd.nc" : "Compartido con A25 Y OVIDE, pero no tiene section_id, etiquetada con A01",
     "06AQ20080210_ctd.nc" : "No contiene la variable section_id",
     "35MF20080207_ctd.nc" : "No contiene la variable section_id",
-    "1985_31TTTPS24_2.nc" : "No contiene la variable section_id"
+    "1985_31TTTPS24_2.nc" : "No contiene la variable section_id",
+    "33RO20230306_ctd.nc" : " qc = 1 = no calibrado",
+    "33RO20230413_ctd.nc" : " qc = 1 = no calibrado"
 }
 
 # variables que tienen nombre cambiado
@@ -132,9 +134,9 @@ def save_fmt(
                     vars_, coords, qcs = vars_coords_interest(ds)
                     if type(years) == list:
                         for i in range(len(years)):
-                            f.write(f"{file_}, {section}, {years[i]}, {str(ds.ctd_temperature.reference_scale) if exist_ctd else str(0)}, {attrs["correction_comment"]} \n")
+                            f.write(f"{file_}, {section}, {years[i]}, {str(ds.ctd_temperature.reference_scale) if exist_ctd else str(0)}, \"{attrs['correction_comment']}\" \n")
                     else:
-                        f.write(f"{file_}: {section}: {years}: {str(ds.ctd_temperature.reference_scale) if exist_ctd else str(0)}, {attrs['correction_comment']} \n")
+                        f.write(f"{file_}, {section}, {years}, {str(ds.ctd_temperature.reference_scale) if exist_ctd else str(0)}, \"{attrs['correction_comment']}\" \n")
                 #print(file_)
                 try:
                     assert f_path.endswith(".nc")
@@ -175,21 +177,38 @@ def correct_sections(
                 print(f"Correcting {f}....")
                 if f in comments:
                     comentario = comments.get(f)
-                    ds = xr.open_dataset(f_path)
+                    ds = xr.load_dataset(f_path)
                     vars_, coords, qcs = vars_coords_interest(dataset = ds)
 
                     ds = ds.where(np.isnan(ds.latitude) == False).where(np.isnan(ds.longitude) == False)
-                    for qc in qcs:
-                        if "temperature" in qc:
-                            ds = ds.where(ds[qc] == 2)
-                
-                    for salinity in ["ctd_salinity", "ctd_salinity_unk", "ctd_salinity_filt", "ctd_salinity_68"]:
+                            
+                                
+                    for salinity in ["ctd_salinity", "ctd_salinity_unk", "ctd_salinity_68"]:
                         if salinity in vars_:
                             sal = salinity
-                
                     ds = ds.where(ds[sal] >= 30).where(ds[sal] <= 40)
-                    if "ctd_temperature_68" in vars_:
+
+                    if "ctd_temperature_68" in vars_ and "ctd_temperature" in vars_:
+                        print("ctd_temperature_68 and ctd_temperature in vars_")
+                        ds = ds.drop_vars(["ctd_temperature_68", "ctd_temperature_68_qc"])
+                    elif "ctd_temperature_68" in vars_ and "ctd_temperature" not in vars_:
+                        print("ctd_temperature_68 in vars_")
+                        atributos = ds["ctd_temperature_68"].attrs
                         ds["ctd_temperature_68"] = ds["ctd_temperature_68"] / 1.00024
+                        ds["ctd_temperature_68"].attrs = atributos
+                        ds = ds.rename({"ctd_temperature_68" : "ctd_temperature",
+                                        "ctd_temperature_68_qc" : "ctd_temperature_qc"})
+                    elif "ctd_temperature_68" not in vars_ and "ctd_temperature" in vars_:
+                        print("ctd_temperature in vars_")
+
+                    vars_, coords, qcs = vars_coords_interest(dataset = ds)
+                    for qc in qcs:
+                        if "temperature" in qc:
+                            if 2 in np.unique(ds[qc].values):
+                                ds = ds.where(ds[qc] == 2)
+                            elif 1 in np.unique(ds[qc].values) and 2 not in np.unique(ds[qc].values):
+                                ds = ds.where(ds[qc] == 1)
+
 
                     ds["section_id"] = section # Añadimos section_id y ponemos misma sección
                     ds.attrs["correction_comment"] = comentario # Añadimos el comentario en los artibutos
@@ -203,9 +222,10 @@ def correct_sections(
                         for year in years:
                             years_ += year + "_"
                         ds.to_netcdf(dst_path + section + "/" + years_ + f)
+                    ds.close()
                 
                 else:    
-                    ds = xr.open_dataset(f_path)
+                    ds = xr.load_dataset(f_path)
                     vars_, coords, qcs = vars_coords_interest(dataset = ds)
 
                     for i in range(len(ds["section_id"])):
@@ -215,20 +235,37 @@ def correct_sections(
                                 if newsection not in ds["section_id"].values[i]:
                                     ds.longitude[i] = np.nan
                                     ds.latitude[i] = np.nan
-    
+
 
                     ds = ds.where(np.isnan(ds.latitude) == False).where(np.isnan(ds.longitude) == False)
-                    for qc in qcs:
-                        if "temperature" in qc:
-                            ds = ds.where(ds[qc] == 2)
+                    
                 
-                    for salinity in ["ctd_salinity", "ctd_salinity_unk", "ctd_salinity_filt", "ctd_salinity_68"]:
+                    for salinity in ["ctd_salinity", "ctd_salinity_unk", "ctd_salinity_68"]:
                         if salinity in vars_:
                             sal = salinity
-                
                     ds = ds.where(ds[sal] >= 30).where(ds[sal] <= 40)
-                    if "ctd_temperature_68" in vars_:
+
+                    if "ctd_temperature_68" in vars_ and "ctd_temperature" in vars_:
+                        print("ctd_temperature_68 and ctd_temperature in vars_")
+                        ds = ds.drop_vars(["ctd_temperature_68", "ctd_temperature_68_qc"])
+                    elif "ctd_temperature_68" in vars_ and "ctd_temperature" not in vars_:
+                        print("ctd_temperature_68 in vars_")
+                        atributos = ds["ctd_temperature_68"].attrs
                         ds["ctd_temperature_68"] = ds["ctd_temperature_68"] / 1.00024
+                        ds["ctd_temperature_68"].attrs = atributos
+                        ds = ds.rename({"ctd_temperature_68" : "ctd_temperature",
+                                        "ctd_temperature_68_qc" : "ctd_temperature_qc"})
+                    elif "ctd_temperature_68" not in vars_ and "ctd_temperature" in vars_:
+                        print("ctd_temperature in vars_")
+
+                    vars_, coords, qcs = vars_coords_interest(dataset = ds)
+                    for qc in qcs:
+                        if "temperature" in qc:
+                            if 2 in np.unique(ds[qc].values):
+                                ds = ds.where(ds[qc] == 2)
+                            elif 1 in np.unique(ds[qc].values) and 2 not in np.unique(ds[qc].values):
+                                ds = ds.where(ds[qc] == 1)
+
                 
                     if os.path.exists(dst_path + section + "/") == False: os.mkdir(dst_path + section + "/")
                     years = get_years(f_path)
@@ -239,13 +276,15 @@ def correct_sections(
                         for year in years:
                             years_ += year + "_"
                         ds.to_netcdf(dst_path + section + "/" + years_ + f)
+                        
+                    ds.close()
             print("Done!\n")
 
 
 
 if __name__ == "__main__":
 
-    #correct_sections(src_path = "./Data/direct_downloads/",dst_path = "./Data/corrected_sections/")
+    correct_sections(src_path = "./Data/direct_downloads/",dst_path = "./Data/corrected_sections/")
     save_fmt('./Data/corrected_sections')
 
     
