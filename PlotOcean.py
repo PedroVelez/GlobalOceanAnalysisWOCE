@@ -38,6 +38,8 @@ def plot_ocean(
         print("Guardando...")
         plt.savefig(dst_path + "oceans_sections.png")
         print("Done")
+    
+    plt.close()
 
 if __name__ == "__main__":
     plot_ocean(path = "./Data/corrected_sections/", projection = ccrs.PlateCarree, central_long = 0, dst_path = "./plots/")
