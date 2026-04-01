@@ -19,3 +19,4 @@ dask-worker-space/*
 Mejoras/.ipynb_checkpoints/*
 .vscode/*
 AnalisisCampanas.ipynb
+.vscode/settings.json

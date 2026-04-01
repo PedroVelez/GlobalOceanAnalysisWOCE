@@ -13,8 +13,8 @@ from tqdm import tqdm
 import gsw
 import glob
 
-# Creamos un diccionario con los comentarios oportunos para cada archivo
-# Fichero : Comentario
+# Creating a dictionary with the comments for each file
+# File : Comment
 comments ={
     "64PE20000926_ctd.nc": "Shared with AR07, but section_id = [A1E/AR7E], labeled as A01",
     "5_58GS20150410_ctd.nc": "Unique but section_id was wrong",
@@ -50,13 +50,36 @@ comments ={
     "33RO20230413_ctd.nc": "qc = 1 = uncalibrated"
 }
 
-# variables que tienen nombre cambiado
+# Creating a dictionary with the new names for the wrong sections_id
+# actual id : real id
 section_rename = {
-    "I05" : "I5",
-    "I09S" : "I9S",
-    "P01" : "P1",
-    "S04" : "S4"
+    "I5" : "I05",
+    "I9S" : "I09S",
+    "P1W" : "P01W",
+    "P1C" : "P01C",
+    "S4" : "S04",
+    "SR04" : "S04",
 }
+
+def homogenize_section_id(
+        ds : xr.core.dataset.Dataset,
+        section_rename : dict
+) -> xr.core.dataset.Dataset:
+    """
+    Change the name of wrong section_id to the correct one
+
+    :param dataset: xarray dataset
+    :param section_rename: dictionary with the new names for the wrong sections_id
+    :return dataset: xarray dataset with homogenized section_id
+    """
+    for i in range(len(ds["section_id"].values)):
+        new_name = section_rename.get(ds["section_id"].values[i])
+        if new_name is not None:
+            ds["section_id"].values[i] = new_name
+            print("Homogeneizado")
+        else:
+            continue
+    return ds
 
 
 def vars_coords_interest(
@@ -228,16 +251,14 @@ def correct_sections(
                 
                 else:    
                     ds = xr.load_dataset(f_path)
+                    ds = homogenize_section_id(ds, section_rename)
                     vars_, coords, qcs = vars_coords_interest(dataset = ds)
-
-                    for i in range(len(ds["section_id"])):
+                            
+                    for i in range(len(ds["section_id"].values)):
                         if section not in ds["section_id"].values[i]:
-                            newsection = section_rename.get(section)
-                            if newsection is not None:
-                                if newsection not in ds["section_id"].values[i]:
-                                    ds.longitude[i] = np.nan
-                                    ds.latitude[i] = np.nan
-
+                            ds["latitude"].values[i] = np.nan
+                            ds["longitude"].values[i] = np.nan
+                            
 
                     ds = ds.where(np.isnan(ds.latitude) == False).where(np.isnan(ds.longitude) == False)
                     
