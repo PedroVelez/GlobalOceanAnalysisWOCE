@@ -34,7 +34,6 @@ comments ={
     "74DI233_ctd.nc": "Shared with AR21, but section_id = [AR21], labeled as A16",
     "74JC19990315_ctd.nc": "Shared with A23 and ALBATROSS, but section_id = [ALBATROSS], labeled as A16, qc = 0 = not assigned",
     "09FA20000926_ctd.nc": "Shared with I05, I10 and ISSO3, but section_id = [I02], labeled as I05",
-    "49NZ20140717_ctd.nc": "P10, but section_id was wrong",
     "33RR20180918_ctd.nc": "P16, but section_id was wrong",
     "325020131025_ctd.nc": "P21, but section_id was wrong",
     "74DI200_1_ctd.nc": "S04, but section_id was wrong",
