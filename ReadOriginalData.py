@@ -58,6 +58,7 @@ section_rename = {
     "P1C" : "P01C",
     "S4" : "S04",
     "SR04" : "S04",
+    "S4P" : "S04"
 }
 
 def homogenize_section_id(
@@ -311,7 +312,7 @@ def correct_sections(
 if __name__ == "__main__":
 
     correct_sections(src_path = "./Data/direct_downloads/",dst_path = "./Data/corrected_sections/")
-    save_fmt('./Data/corrected_sections')
+    #save_fmt('./Data/corrected_sections')
 
     
             
