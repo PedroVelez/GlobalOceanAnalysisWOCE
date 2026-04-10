@@ -35,7 +35,9 @@
 
     El procedimiento consiste en crear la curva del filtro hanning para luego hacer una convolución con la variable de interes de forma que está se ajusta a la curva y suaviza los perfiles. Por defecto se usa un filtro con 40 dbar como ancho de kernel y una resolución espacial de 1 m.
 
-- Unir todas los datos en una matriz -  uneCruises.ipynb.
+- Unir todas los datos en una matriz: uneCruises.ipynb.
+    Este jupyternotebook lee los datos de Data/corrected_sections_filtrado/, a los que ya se les ha aplicado el filtro Hanning. Guarda en Data/join/ un fichero .nc que contiene todos los datos de todos los archivos. Las variables de este fichero son Temperatura, salinidad, y oxígeno filtrados. Como coordenas tiene latitud, longitud, fecha y nombre del fichero de origen. Por último como dimensiones tiene N_PROFxN_LEVELS donde N_PROF es la suma de todos los perfiles que habían en los ficheros y N_LEVES va desde 0 hasta el máximo de presión interpolada.
+    
 - Calcula Matriz de ocupaciones: grid.ipynb y grid.py (en scripts_samuel)
 - Tendencias y mapas: CalculaTendencias y MapasTendencias.ipynb
 
