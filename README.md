@@ -38,6 +38,10 @@
 - Unir todas los datos en una matriz: uneCruises.ipynb.
     Este jupyternotebook lee los datos de Data/corrected_sections_filtrado/, a los que ya se les ha aplicado el filtro Hanning. Guarda en Data/join/ un fichero .nc que contiene todos los datos de todos los archivos. Las variables de este fichero son Temperatura, salinidad, y oxígeno filtrados. Como coordenas tiene latitud, longitud, fecha y nombre del fichero de origen. Por último como dimensiones tiene N_PROFxN_LEVELS donde N_PROF es la suma de todos los perfiles que habían en los ficheros y N_LEVES va desde 0 hasta el máximo de presión interpolada.
     
-- Calcula Matriz de ocupaciones: grid.ipynb y grid.py (en scripts_samuel)
+- Calcula Matriz de ocupaciones: grid.ipynb y grid.py 
+    - El archivo grid.ipynb lee los datos de Data/join/total_filt.nc y devuelve un archivo con el nombre grid_1_9019.nc en la carpeta Data/grid/. Recorta los datos para que las presiones esten entre 1990 y 2010, aunque esto se puede cambiar. Luego crea un grid de latitud, longitud y profundidad con paso 1 y profundidad con resolución 100 dbar. Crea un dataset en el que las dimensiones son latitud, longitud, profundidad y tiempo, y las variables las temperaturas, salinidades y oxigenos medios. De está forma para cada grid, cada profundidad y cada fecha hay un valor de temperatura, salinidad y oxigeno.
+    - El archivo grid.py contiene una función que es usada en el código anterior. En concreto occupation_matrix, que devuelve los arrays de temperatura, salinidad y oxigeno con las dimensiones antes mencionadas. Su finalidad es auxiliar, por si solo no hace nada.
+
+    
 - Tendencias y mapas: CalculaTendencias y MapasTendencias.ipynb
 
