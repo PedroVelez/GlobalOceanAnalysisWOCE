@@ -4,8 +4,12 @@
     - SectionExtractor.py, que lee de .Data/direct_downloads  da una lista de las variables section_id de cada archivo, lo que permite identificar problemas. De esta forma se tiene en cuenta todos los posibles errores que puedan llevar a perdidas de datos por el camino.
 
 - Datos nuevos:
-    En el fichero DatosNuevos2026.txt, se encontrarán los archivos descargados que fueron añadidos en marzo de 2026.
+    - En el fichero DatosNuevos2026.txt, se encontrarán los archivos descargados que fueron añadidos en marzo de 2026.
     - El notebook NewDataComparison.ipynb, se encuentran dos pequeñas celdas que imprimen el nombre del archivo, el expocode, la fecha de inicio y la de final de la carpeta Data/direct_downloads/ y Data/direct_downloadas_nuevos/ de una misma sección, de forma que se puede comprobar si los ficheros etiquetados como nuevos realmente pertenecen a una campaña nueva.
+
+- Identificar valores qc para posterior filtrado: QualityControlExtractor.ipynb
+    Esta función usa los datos de Data/direct_downloads/ y crea una lista por secciones de las variables que tienen control de calidad y que valores tienen estos. Sabiendo los distintos valores de control de calidad que tienen las variables en los archivos, se puede escoger un filtrado más apropiado. Se recomienda revisar la documentación: [WOCE CTD Quality Codes](https://exchange-format.readthedocs.io/en/latest/quality.html)
+    
 
 - Leer datos y tabla: ReadOriginalData.py
     En ./Data/direct_downloads/, están las las descargas crudas de internet ya organizadas por secciones WOCE. Cuando una campaña tenia 'section_id' y se realizaba de manera conjunta en dos o más secciones WOCE we copiaba por duplicado en las carpetas de las secciones.  Cuando un campaña no tiene 'section_id' se copia solamente en una carpeta, la que más se asemeja a la sección correspondiente.
@@ -27,6 +31,10 @@
     Está función lee los datos de Data/corrected_sections/ y hace un diagrama TS para cada archivo, guardándolo en ./plots/'SECTION' donde section es la sección que le corresponde. Contiene el parámetro raw, que si se le da el valor 'FALSE' representa de forma ordinaria, y si se le da el valor 'TRUE' representa en crudo de forma que es más sencillo identificar anomálias, es un parámetro más ligado al tamaño de los puntos. Estos diagramas se guardan con nombre "raw_TS_NOMBRE_DEL_FICHERO_EN_LA_CARPETA_DE_ENTRADA" si raw = 'TRUE' o igual pero sin el raw en caso de raw = 'FALSE'. También da la opción de indicar que secciones representar, por lo que en caso de solo necesitar representar una única sección, no hay que repetir las demás.
 
 - Versión filtrada: aplicaFiltroHanning.ipynb
+    Este jupyternotebook lee los datos de Data/corrected_sections/, que ya han sido procesados con ReadOriginalData.py y le aplica un filtro Hanning a las variables de interes. Limpia el archivo para que solo tenga las variables y coordenadas necesarias, ya con el filtro aplicado. Devuelve estos ficheros corregidos en la carpeta Data/corrected_sections_filtrado/ en su correspondiente sección. En el notebook se puede ejecutar una prueba previa con la sección A01, además permite escoger la resolución de los puntos del filtrado. 
+
+    El procedimiento consiste en crear la curva del filtro hanning para luego hacer una convolución con la variable de interes de forma que está se ajusta a la curva y suaviza los perfiles. Por defecto se usa un filtro con 40 dbar como ancho de kernel y una resolución espacial de 1 m.
+
 - Unir todas los datos en una matriz -  uneCruises.ipynb.
 - Calcula Matriz de ocupaciones: grid.ipynb y grid.py (en scripts_samuel)
 - Tendencias y mapas: CalculaTendencias y MapasTendencias.ipynb

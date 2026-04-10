@@ -12,6 +12,19 @@ import pandas as pd
 from tqdm import tqdm
 import gsw
 import glob
+"""For this code is important to take into account the quality control falgs for the different variables. According to the WOCE web site, the quality control flags are the following:
+0 : Not assigned
+1 : Not calibrated
+2: Acceptable measurementç
+3 : Questionable measurement
+4 : Bad measurement
+5 : Not reported
+6 : Interpolated over a pressure interval larger than 2 dbar.
+7 : despiked
+8 : Not used for ctd data
+9 : Not sampled
+With these flags on mind and after some inspection of the data, we have concluded that the best way to proceed is only keep the data with qc = 0 , 1 and 2
+"""
 
 # Creating a dictionary with the comments for each file
 # File : Comment
@@ -60,6 +73,7 @@ section_rename = {
     "SR04" : "S04",
     "S4P" : "S04"
 }
+
 
 def homogenize_section_id(
         ds : xr.core.dataset.Dataset,
@@ -130,8 +144,6 @@ def get_years(
     
     return years if len(years) > 1 else years[0]
     
-
-
 
 def save_fmt(
         path : str
@@ -224,15 +236,11 @@ def correct_sections(
 
                     vars_, coords, qcs = vars_coords_interest(dataset = ds)
                     for qc in qcs:
-                        if "temperature" or "salinity" in qc:
+                        if "ctd_temperature" or "ctd_salinity" in qc:
                             if 2 in np.unique(ds[qc].values):
                                 ds = ds.where(ds[qc] == 2)
-                                print("quality control = 2")
                             elif 1 in np.unique(ds[qc].values) and 2 not in np.unique(ds[qc].values):
                                 ds = ds.where(ds[qc] == 1)
-                                print("quality control = 1")
-                            else:
-                                print("No quality control")
 
 
                     ds["section_id"] = section # Añadimos section_id y ponemos misma sección
@@ -283,15 +291,11 @@ def correct_sections(
 
                     vars_, coords, qcs = vars_coords_interest(dataset = ds)
                     for qc in qcs:
-                        if "temperature" or "salinity" in qc:
+                        if "ctd_temperature" or "ctd_salinity" in qc:
                             if 2 in np.unique(ds[qc].values):
                                 ds = ds.where(ds[qc] == 2)
-                                print("quality control = 2")
                             elif 1 in np.unique(ds[qc].values) and 2 not in np.unique(ds[qc].values):
                                 ds = ds.where(ds[qc] == 1)
-                                print("quality control = 1")
-                            else:
-                                print("No quality control")
 
                 
                     if os.path.exists(dst_path + section + "/") == False: os.mkdir(dst_path + section + "/")
