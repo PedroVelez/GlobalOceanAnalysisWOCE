@@ -45,9 +45,13 @@
 
     Este jupyternotebook lee los datos de Data/corrected_sections_filtrado/, a los que ya se les ha aplicado el filtro Hanning. Guarda en Data/join/ un fichero .nc que contiene todos los datos de todos los archivos. Las variables de este fichero son Temperatura, salinidad, y oxígeno filtrados. Como coordenas tiene latitud, longitud, fecha y nombre del fichero de origen. Por último como dimensiones tiene N_PROFxN_LEVELS donde N_PROF es la suma de todos los perfiles que habían en los ficheros y N_LEVES va desde 0 hasta el máximo de presión interpolada.
     
-- Calcula Matriz de ocupaciones: grid.ipynb y grid.py 
-    - El archivo grid.ipynb lee los datos de Data/join/total_filt.nc y devuelve un archivo con el nombre grid_1_9019.nc en la carpeta Data/grid/. Recorta los datos para que las presiones esten entre 1990 y 2010, aunque esto se puede cambiar. Luego crea un grid de latitud, longitud y profundidad con paso 1 y profundidad con resolución 100 dbar. Crea un dataset en el que las dimensiones son latitud, longitud, profundidad y tiempo, y las variables las temperaturas, salinidades y oxigenos medios. De está forma para cada grid, cada profundidad y cada fecha hay un valor de temperatura, salinidad y oxigeno.
-    - El archivo grid.py contiene una función que es usada en el código anterior. En concreto occupation_matrix, que devuelve los arrays de temperatura, salinidad y oxigeno con las dimensiones antes mencionadas. Su finalidad es auxiliar, por si solo no hace nada.
+- Calcula Matriz de ocupaciones: grid.ipynb
+    - El archivo grid.ipynb lee los datos de Data/join/total_filt.nc y devuelve un archivo con el nombre occupation.nc en la carpeta Data/grid/. La idea es crear un grid de latitudes y longitudes de resolución ajustable, de forma que para cada pixel del mapa se pueda ver el número de ocupaciones para ese punto, y además que perfiles del archivo total_filt.nc son los que contiene. De esta forma las dimensiones son de $latitud \times longitud \times n_{prof}$, donde $n_{prof}$ es el número máximo de ocupaciones que se esperan para cualquier pixel, es decir, cada punto tendrá un n inferior a $n_{prof}$.
+
+    Este mismo notabook también representa las ocupaciones por cada punto del grid en un mapa y una barra de color, de forma que se puede ver el número de perfiles por punto. Las figuras que se obtienen se guardan en /plots/Occupation_grids/ con un nombre de archivo distinto según la resolución usada.  
+    - Las versiones anteriores de está parte se encuentran contenidas en los archivos: grid_2025.ipynb y grid_2025.grid. Estas incluyen un cálculo descartado de temperatura y salinidad medias de cada perfil.
+        - Nota: La función locate.py es usada en estos script
+    
 
 
 - Tendencias y mapas: CalculaTendencias y MapasTendencias.ipynb
