@@ -87,10 +87,13 @@ def homogenize_section_id(
     :return dataset: xarray dataset with homogenized section_id
     """
     for i in range(len(ds["section_id"].values)):
+        k = 0
         new_name = section_rename.get(ds["section_id"].values[i])
         if new_name is not None:
+            k += 1
             ds["section_id"].values[i] = new_name
-            print("Homogeneizado")
+            if k == 1:
+                print("Homogeneizado")
         else:
             continue
     return ds
@@ -236,7 +239,7 @@ def correct_sections(
 
                     vars_, coords, qcs = vars_coords_interest(dataset = ds)
                     for qc in qcs:
-                        if "ctd_temperature" or "ctd_salinity" in qc:
+                        if "ctd_temperature" in qc or "ctd_salinity" in qc:
                             if 2 in np.unique(ds[qc].values):
                                 ds = ds.where(ds[qc] == 2)
                             elif 1 in np.unique(ds[qc].values) and 2 not in np.unique(ds[qc].values):
@@ -259,6 +262,7 @@ def correct_sections(
                 
                 else:    
                     ds = xr.load_dataset(f_path)
+                    ds = ds.set_coords("section_id")
                     ds = homogenize_section_id(ds, section_rename)
                     vars_, coords, qcs = vars_coords_interest(dataset = ds)
                             
@@ -291,7 +295,7 @@ def correct_sections(
 
                     vars_, coords, qcs = vars_coords_interest(dataset = ds)
                     for qc in qcs:
-                        if "ctd_temperature" or "ctd_salinity" in qc:
+                        if "ctd_temperature" in qc or "ctd_salinity" in qc:
                             if 2 in np.unique(ds[qc].values):
                                 ds = ds.where(ds[qc] == 2)
                             elif 1 in np.unique(ds[qc].values) and 2 not in np.unique(ds[qc].values):
