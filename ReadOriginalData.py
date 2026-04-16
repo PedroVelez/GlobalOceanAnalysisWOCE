@@ -262,7 +262,7 @@ def correct_sections(
                                 ds = ds.where(ds[qc] == 1)
                     # If qc doesn't have those values, we keep all
 
-                    section_id = np.full(ds.sizes['N_PROF'], section) # Creating a new section array
+                    section_id = np.full(ds.sizes['N_PROF'], section.split('\\')[-1]) # Creating a new section array
                     ds["section_id"] = ("N_PROF", section_id) # Adding section_id 
                     ds = ds.set_coords("section_id") # Set it as a coordinate
 
