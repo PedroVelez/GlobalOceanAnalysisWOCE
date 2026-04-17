@@ -54,5 +54,6 @@
     
 
 
-- Tendencias y mapas: CalculaTendencias y MapasTendencias.ipynb
+- Tendencias y mapas: CalculaTendencias.ipynb y MapasTendencias.ipynb
+    - El fichero CalculaTendencias.ipynb extrae el grid de la resolución deseada de /Data/grid/ y los datos de temperatura y salinidad de /Data/join/total_filt.nc. Con estos archivos calcula la tendencia en los pixeles donde hayan valores suficientes como para calcular la misma. En principio el criterio es que dicho pixel contenga al menos 3 datos de temperatura y que estos tengan una separación temporal de al menos 2.5 años. Guarda un fichero del mismo tipo que el grid, pero con la variable tendencia añadida en /Data/tendency/, indicando años en los que se ha filtrado, niveles y resolución. También guarda mapas en /plots/Tendency_grids/ que permiten ver las tendencias en los puntos en los que existen permitiendo ver si los resultados son buenos.
 
