@@ -45,8 +45,15 @@
 
     Este jupyternotebook lee los datos de Data/corrected_sections_filtrado/, a los que ya se les ha aplicado el filtro Hanning. Guarda en Data/join/ un fichero .nc que contiene todos los datos de todos los archivos. Las variables de este fichero son Temperatura, salinidad, y oxígeno filtrados. Como coordenas tiene latitud, longitud, fecha y nombre del fichero de origen. Por último como dimensiones tiene N_PROFxN_LEVELS donde N_PROF es la suma de todos los perfiles que habían en los ficheros y N_LEVES va desde 0 hasta el máximo de presión interpolada.
     
+
+- Crear división por cuencas: CreateMask.ipynb
+    - En la carpeta CreaCuencas hay varios códigos en matlab que crean archivos csv, indicando el valor de la máscara para cada pixel del mapa. La división por cuencas usada se extrae de el artículo de Sarah G.Purkey: [Warming of Global Abyssal and Deep Southern Ocean Waters between the 1990s and 2000s: Contributions to Global Heat Content and Sea Level Rise Budgets](https://journals.ametsoc.org/view/journals/clim/23/23/2010jcli3682.1.xml?tab_body=pdf)
+
+    - En el fichero CreateMask.ipynb se crea dicha máscara devolviendo un archivo netcdf en Data/Mascara/mascara.nc, que contiene el valor de cuenca asociado a cada pixel
+
+
 - Calcula Matriz de ocupaciones: grid.ipynb
-    - El archivo grid.ipynb lee los datos de Data/join/total_filt.nc y devuelve un archivo con el nombre occupation.nc en la carpeta Data/grid/. La idea es crear un grid de latitudes y longitudes de resolución ajustable, de forma que para cada pixel del mapa se pueda ver el número de ocupaciones para ese punto, y además que perfiles del archivo total_filt.nc son los que contiene. De esta forma las dimensiones son de $latitud \times longitud \times n_{prof}$, donde $n_{prof}$ es el número máximo de ocupaciones que se esperan para cualquier pixel, es decir, cada punto tendrá un n inferior a $n_{prof}$.
+    - El archivo grid.ipynb lee los datos de Data/join/total_filt.nc y devuelve un archivo con el nombre occupation.nc en la carpeta Data/grid/. La idea es crear un grid de latitudes y longitudes de resolución ajustable, de forma que para cada pixel del mapa se pueda ver el número de ocupaciones para ese punto, y además que perfiles del archivo total_filt.nc son los que contiene. De esta forma las dimensiones son de $latitud \times longitud \times n_{prof}$, donde $n_{prof}$ es el número máximo de ocupaciones que se esperan para cualquier pixel, es decir, cada punto tendrá un n inferior a $n_{prof}$. También tiene unas celdas que añaden una tercera variable mask, que corresponde a la máscara creada en CreaCuencas/CreateMask.ipynb, de forma que la máscara está ya guardada en los ficheros
 
     Este mismo notabook también representa las ocupaciones por cada punto del grid en un mapa y una barra de color, de forma que se puede ver el número de perfiles por punto. Las figuras que se obtienen se guardan en /plots/Occupation_grids/ con un nombre de archivo distinto según la resolución usada.  
     - Las versiones anteriores de está parte se encuentran contenidas en los archivos: grid_2025.ipynb y grid_2025.grid. Estas incluyen un cálculo descartado de temperatura y salinidad medias de cada perfil.
@@ -56,4 +63,6 @@
 
 - Tendencias y mapas: CalculaTendencias.ipynb y MapasTendencias.ipynb
     - El fichero CalculaTendencias.ipynb extrae el grid de la resolución deseada de /Data/grid/ y los datos de temperatura y salinidad de /Data/join/total_filt.nc. Con estos archivos calcula la tendencia en los pixeles donde hayan valores suficientes como para calcular la misma. En principio el criterio es que dicho pixel contenga al menos 3 datos de temperatura y que estos tengan una separación temporal de al menos 2.5 años. Guarda un fichero del mismo tipo que el grid, pero con la variable tendencia añadida en /Data/tendency/, indicando años en los que se ha filtrado, niveles y resolución. También guarda mapas en /plots/Tendency_grids/ que permiten ver las tendencias en los puntos en los que existen permitiendo ver si los resultados son buenos.
+
+    - El fichero MapasTendencias.ipynb lee los datos de /Data/tendency/ y calcula la media y desviación de la tendencia por cuencas, de forma que se representan estas variables en un mapa. Este mapa se guarda en plots/Mapas_Tendencias/ indicando los datos necesarios para entender sus características.
 
