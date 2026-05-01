@@ -66,3 +66,6 @@
 
     - El fichero MapasTendencias.ipynb lee los datos de /Data/tendency/ y calcula la media y desviación de la tendencia por cuencas, de forma que se representan estas variables en un mapa. Este mapa se guarda en plots/Mapas_Tendencias/ indicando los datos necesarios para entender sus características.
 
+- Tendencias por niveles: CalculaTendenciaNiveles.ipynb
+
+    Este fichero lee los datos de /Data/grid/ y /Data/join/total_filt.nc y calcula la tendencia en los pixeles donde hayan valores suficientes como para calcular la misma. En principio el criterio es que dicho pixel contenga al menos 3 datos de temperatura y que estos tengan una separación temporal de al menos 2.5 años. Guarda un fichero del mismo tipo que el grid, pero con la variable tendencia añadida y la presión como tercera dimensión en /Data/tendency_levels/. El código con el que se guarda indica las fechas utilizadas, las profundidades y la resolución espacial usada.
