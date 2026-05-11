@@ -4,7 +4,7 @@
         "cuencas",
         "datos",
         "idxs",
-        "índices",
+        "\u00c3\u00adndices",
         "nanmean",
         "nanstd",
         "nansum",
@@ -16,5 +16,6 @@
         "."
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": true,
+    "python.defaultInterpreterPath": "C:\\Users\\ismae\\miniconda3\\envs\\practicas\\python.exe"
 }
