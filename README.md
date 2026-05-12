@@ -85,7 +85,7 @@
     El script lee de ./Data/Heat_vars/ y calcula la media y la desviación por cuencas, representando las mismas en un mapa en ./plots/Mapas_Heat_Flux/. También guarda un archivo con el flujo de calor medio y la desviación por cuencas en ./Data/Heat_flux/. Como siempre, el nombre del fichero indica las características del mismo.
     
 - Flujo de Calor global: TotalHeatFlux.ipynb
-    En este se calcula el flujo de calor global leyendo los datos de /Data/Heat_flux/. Devuelve un fichero csv que contiene información sobre el flujo de calor global, así como por cuencas e indicando los métodos resoluciones y fechas usadas.
+    En este se calcula el flujo de calor global leyendo los datos de /Data/Heat_flux/. Devuelve un fichero csv que contiene información sobre el flujo de calor global, así como por cuencas y hemisferios e indicando los métodos resoluciones y fechas usadas.
 
 - Tendencias para la comparación con los datos Argo: CalculaTendenciaNivelesArgo.ipynb
     Basicamente este código es una adpatación de CalculaTendenciaNiveles.ipynb pero adaptada para poder comparar con los datos obtenidos de campañas Argo.
