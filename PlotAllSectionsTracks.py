@@ -1,4 +1,7 @@
+# Import the same packages
 from ReadOriginalData import *
+
+# Define a function which plot all the sections
 def plot_all_sections(
     path : str,
     dst_path : str,
@@ -18,24 +21,39 @@ def plot_all_sections(
     :param start_secction: section str where user wants to start, default -> A01
     """
     colors = ["b", "g", "r", "c", "m", "y", "k", "peru", "lime", "slategrey", "yellowgreen", "hotpink","b", "g", "r", "c", "m", "y", "k", "peru", "lime", "slategrey", "yellowgreen", "hotpink"]
-    sections = sorted(os.listdir(path))
-    index_start = sections.index(start_section)
+
+    sections = sorted(os.listdir(path)) # sorted sections
+    index_start = sections.index(start_section) # Start section
+
     for section in sections[index_start:]:
         print(f"Plotting section {section}....")
-        save_path = f"{dst_path}{section}/"
+
+        save_path = f"{dst_path}{section}/" # Path for save the files
+
+        # Create if that path does not exist
         if os.path.exists(save_path) == False: os.mkdir(save_path)
+
+        # Iterate over all the files in path
         for i, f in enumerate(os.listdir(path + section + "/")):
-            f_path = path + section + "/" + f
-            nombre = f.split(".")[0]
+            f_path = path + section + "/" + f # File path
+
+            nombre = f.split(".")[0] # File name
             if f_path.endswith('.nc'):
-                ds = xr.load_dataset(filename_or_obj = f_path)
+                ds = xr.load_dataset(filename_or_obj = f_path) # Open dataset
+
+                # Create and plot the figure
                 fig = plt.figure(figsize = (12, 10))
+
+                # Add features 
                 ax = plt.axes(projection = projection(central_longitude = 180 if str(section[0]) == "I" or str(section[0]) == "P" else 0))
                 ax.set_extent((-180, 180, -90, 90))
                 ax.gridlines(draw_labels=True, linewidth=1, color='gray', alpha=0.4, linestyle='--')
                 ax.coastlines()
+
+                # Scatter of points
                 ax.scatter(ds.longitude, ds.latitude, marker = ".", color = colors[i], label = f"{f}", transform = projection())
-                # if copy == True: os.system(f"cp {path}{section}/{f} {save_path}{f}")
+
+                # Save files
                 plt.title(f"Section {section} {nombre}" )
                 plt.legend()
                 plt.savefig(f"{save_path}section_{section}_{nombre}.png")
