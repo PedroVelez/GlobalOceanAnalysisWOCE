@@ -14,9 +14,10 @@ Prueba*
 Prueba/*
 Info/*
 Data/*
+DataIsmael/*
 .ipynb_checkpoints/*
 dask-worker-space/*
 Mejoras/.ipynb_checkpoints/*
+.vscode/
 .vscode/*
-AnalisisCampanas.ipynb
 /.vscode/*
