@@ -5,6 +5,7 @@
 *.swp
 *.log
 *.nc
+*.mat
 *.pdf
 *.pyc
 *pycache*
@@ -12,11 +13,9 @@
 prueba*
 Prueba*
 Prueba/*
+Data/*
 Info/*
 2025/*
-Data2025/*
-Data/*
-DataIsmael/*
 .ipynb_checkpoints/*
 dask-worker-space/*
 Mejoras/.ipynb_checkpoints/*
