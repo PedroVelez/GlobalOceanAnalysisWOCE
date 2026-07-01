@@ -5,6 +5,8 @@
 *.swp
 *.log
 *.nc
+*.WCT
+*.wct
 *.mat
 *.npy
 *.zip
@@ -16,7 +18,6 @@
 prueba*
 Prueba*
 Prueba/*
-Data/*
 Info/*
 2025/*
 .ipynb_checkpoints/*

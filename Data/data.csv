@@ -1,0 +1,253 @@
+File,Section,Year,Ref,Comment
+./Data/corrected_sections/A01\1991_06MT18_1_ctd.nc,A01,1991,ITS-90, 0 
+./Data/corrected_sections/A01\1994_06MT30_3_ctd.nc,A01,1994,0, 0 
+./Data/corrected_sections/A01\1995_18HU95011_1_ctd.nc,A01,1995,ITS-90, 0 
+./Data/corrected_sections/A01\2000_64PE20000926_ctd.nc,A01,2000,ITS-90,"Shared with AR07, but section_id = [A1E/AR7E], labeled as A01" 
+./Data/corrected_sections/A01\2000_64PE20000926_ctd.nc,A01,2000,ITS-90, 0 
+./Data/corrected_sections/A01\2014_35PK20140515_ctd.nc,A01,2014,ITS-90,"Shared with A25 AND OVIDE, but it has no section_id, labeled as A01" 
+./Data/corrected_sections/A01\2014_35PK20140515_ctd.nc,A01,2014,ITS-90, 0 
+./Data/corrected_sections/A01\2015_5_58GS20150410_ctd.nc,A01,2015,ITS-90,"Unique but section_id was wrong" 
+./Data/corrected_sections/A01\2015_5_58GS20150410_ctd.nc,A01,2015,ITS-90, 0 
+./Data/corrected_sections/A02\1994_06MT030_2_ctd.nc,A02,1994,ITS-90, 0 
+./Data/corrected_sections/A02\1997_06MT039_3_ctd.nc,A02,1997,ITS-90, 0 
+./Data/corrected_sections/A02\2011_06MT20110624_ctd.nc,A02,2011,ITS-90, 0 
+./Data/corrected_sections/A02\2013_9_06M220130509_ctd.nc,A02,2013,ITS-90, 0 
+./Data/corrected_sections/A02\2017_45CE20170427_ctd.nc,A02,2017,ITS-90, 0 
+./Data/corrected_sections/A05\1981_1981_US008812.nc,A05,1981,ITS-90, 0 
+./Data/corrected_sections/A05\1992_29HE06_1_ctd.nc,A05,1992,ITS-90, 0 
+./Data/corrected_sections/A05\1998_31RBOACES24N_2_ctd.nc,A05,1998,ITS-90,"Shared with AR01, but section_id = [AR01], labeled as A05" 
+./Data/corrected_sections/A05\1998_31RBOACES24N_2_ctd.nc,A05,1998,ITS-90, 0 
+./Data/corrected_sections/A05\2004_74DI20040404_ctd.nc,A05,2004,ITS-90, 0 
+./Data/corrected_sections/A05\2010_74DI20100106_ctd.nc,A05,2010,ITS-90, 0 
+./Data/corrected_sections/A05\2011_29AH20110128_ctd.nc,A05,2011,ITS-90,"Unique but section_id was wrong" 
+./Data/corrected_sections/A05\2011_29AH20110128_ctd.nc,A05,2011,ITS-90, 0 
+./Data/corrected_sections/A05\2015_2016_74EQ20151206_ctd.nc,A05,2015,ITS-90, 0 
+./Data/corrected_sections/A05\2015_2016_74EQ20151206_ctd.nc,A05,2016,ITS-90, 0 
+./Data/corrected_sections/A05\2020_740H20200119_ctd.nc,A05,2020,ITS-90, 0 
+./Data/corrected_sections/A05\2022_6_74EQ20220209_ctd.nc,A05,2022,ITS-90,"Unique but section_id was wrong" 
+./Data/corrected_sections/A05\2022_6_74EQ20220209_ctd.nc,A05,2022,ITS-90, 0 
+./Data/corrected_sections/A10\1992_1993_06MT22_5_ctd.nc,A10,1992,0, 0 
+./Data/corrected_sections/A10\1992_1993_06MT22_5_ctd.nc,A10,1993,0, 0 
+./Data/corrected_sections/A10\2003_49NZ200311_4_ctd.nc,A10,2003,ITS-90, 0 
+./Data/corrected_sections/A10\2009_740H20090307_ctd.nc,A10,2009,ITS-90,"Shared with A09 AND A09.5, but section_id = [A095], labeled as A10" 
+./Data/corrected_sections/A10\2009_740H20090307_ctd.nc,A10,2009,ITS-90, 0 
+./Data/corrected_sections/A10\2011_33RO20110926_ctd.nc,A10,2011,ITS-90, 0 
+./Data/corrected_sections/A10\2018_740H20180228_ctd.nc,A10,2018,ITS-90,"Shared with A09 AND A09.5, but section_id = [A09.5-245], labeled as A10" 
+./Data/corrected_sections/A10\2018_740H20180228_ctd.nc,A10,2018,ITS-90, 0 
+./Data/corrected_sections/A12\1986_None_ctd.nc,A12,1986,ITS-90,"Unique but section_id was wrong" 
+./Data/corrected_sections/A12\1986_None_ctd.nc,A12,1986,ITS-90, 0 
+./Data/corrected_sections/A12\1992_06AQANTX_4_ctd.nc,A12,1992,ITS-90, 0 
+./Data/corrected_sections/A12\1994_06AQ19941123_ctd.nc,A12,1994,ITS-90,"Shared with A23, but section_id was wrong, labeled as A12" 
+./Data/corrected_sections/A12\1994_06AQ19941123_ctd.nc,A12,1994,ITS-90, 0 
+./Data/corrected_sections/A12\1999_06ANTXVI_2_ctd.nc,A12,1999,ITS-90, 0 
+./Data/corrected_sections/A12\2000_2001_06ANTXVIII_3_ctd.nc,A12,2000,ITS-90, 0 
+./Data/corrected_sections/A12\2000_2001_06ANTXVIII_3_ctd.nc,A12,2001,ITS-90, 0 
+./Data/corrected_sections/A12\2002_2003_06AQ200211_2_ctd.nc,A12,2002,ITS-90, 0 
+./Data/corrected_sections/A12\2002_2003_06AQ200211_2_ctd.nc,A12,2003,ITS-90, 0 
+./Data/corrected_sections/A12\2005_06AQ20050122_ctd.nc,A12,2005,0, 0 
+./Data/corrected_sections/A12\2006_06AQ20060825_ctd.nc,A12,2006,ITS-90,"Shared with A21, but section_id was wrong, labeled as A12" 
+./Data/corrected_sections/A12\2006_06AQ20060825_ctd.nc,A12,2006,ITS-90, 0 
+./Data/corrected_sections/A12\2007_2008_06AQ20071128_ctd.nc,A12,2007,ITS-90, 0 
+./Data/corrected_sections/A12\2007_2008_06AQ20071128_ctd.nc,A12,2008,ITS-90, 0 
+./Data/corrected_sections/A12\2008_06AQ20080210_ctd.nc,A12,2008,ITS-90,"Does not contain the section_id variable" 
+./Data/corrected_sections/A12\2008_06AQ20080210_ctd.nc,A12,2008,ITS-90, 0 
+./Data/corrected_sections/A12\2008_35MF20080207_ctd.nc,A12,2008,0,"Does not contain the section_id variable" 
+./Data/corrected_sections/A12\2008_35MF20080207_ctd.nc,A12,2008,0, 0 
+./Data/corrected_sections/A12\2014_2015_06AQ20141202_ctd.nc,A12,2014,ITS-90, 0 
+./Data/corrected_sections/A12\2014_2015_06AQ20141202_ctd.nc,A12,2015,ITS-90, 0 
+./Data/corrected_sections/A13.5\1983_316N19831007_ctd.nc,A13.5,1983,IPTS-68,"A13.5, but section_id = [AJAX], qc = 1 = uncalibrated" 
+./Data/corrected_sections/A13.5\1983_316N19831007_ctd.nc,A13.5,1983,IPTS-68, 0 
+./Data/corrected_sections/A13.5\1984_316N19840111_ctd.nc,A13.5,1984,IPTS-68,"A13.5, but section_id = [AJAX], qc = 1 = uncalibrated" 
+./Data/corrected_sections/A13.5\1984_316N19840111_ctd.nc,A13.5,1984,IPTS-68, 0 
+./Data/corrected_sections/A13.5\1995_35A3CITHER3_2_ctd.nc,A13.5,1995,ITS-90,"A13.5, but section_id = [AJAX]" 
+./Data/corrected_sections/A13.5\1995_35A3CITHER3_2_ctd.nc,A13.5,1995,ITS-90, 0 
+./Data/corrected_sections/A13.5\2010_33RO20100308_ctd.nc,A13.5,2010,ITS-90, 0 
+./Data/corrected_sections/A16\1988_32OC202_1_ctd.nc,A16,1988,IPTS-68, 0 
+./Data/corrected_sections/A16\1989_318MHYDROS4_ctd.nc,A16,1989,ITS-90, 0 
+./Data/corrected_sections/A16\1989_318MSAVE5_ctd.nc,A16,1989,ITS-90, 0 
+./Data/corrected_sections/A16\1993_3175MB93_ctd.nc,A16,1993,ITS-90,"Shared with AR21, but section_id = [AR21b], labeled as A16" 
+./Data/corrected_sections/A16\1993_3175MB93_ctd.nc,A16,1993,ITS-90, 0 
+./Data/corrected_sections/A16\1995_74JC10_1_ctd.nc,A16,1995,ITS-90,"Shared with A23, but section_id = [A23], labeled as A16" 
+./Data/corrected_sections/A16\1995_74JC10_1_ctd.nc,A16,1995,ITS-90, 0 
+./Data/corrected_sections/A16\1998_74DI233_ctd.nc,A16,1998,ITS-90,"Shared with AR21, but section_id = [AR21], labeled as A16" 
+./Data/corrected_sections/A16\1998_74DI233_ctd.nc,A16,1998,ITS-90, 0 
+./Data/corrected_sections/A16\1999_74JC19990315_ctd.nc,A16,1999,ITS-90,"Shared with A23 and ALBATROSS, but section_id = [ALBATROSS], labeled as A16, qc = 0 = not assigned" 
+./Data/corrected_sections/A16\1999_74JC19990315_ctd.nc,A16,1999,ITS-90, 0 
+./Data/corrected_sections/A16\2003_33RO200306_01_ctd.nc,A16,2003,ITS-90, 0 
+./Data/corrected_sections/A16\2005_33RO200501_ctd.nc,A16,2005,ITS-90, 0 
+./Data/corrected_sections/A16\2011_74DI20110715_ctd.nc,A16,2011,ITS-90, 0 
+./Data/corrected_sections/A16\2013_2014_33RO20131223_ctd.nc,A16,2013,ITS-90, 0 
+./Data/corrected_sections/A16\2013_2014_33RO20131223_ctd.nc,A16,2014,ITS-90, 0 
+./Data/corrected_sections/A16\2013_33RO20130803_ctd.nc,A16,2013,ITS-90, 0 
+./Data/corrected_sections/A16\2023_33RO20230306_ctd.nc,A16,2023,ITS-90,"qc = 1 = uncalibrated" 
+./Data/corrected_sections/A16\2023_33RO20230306_ctd.nc,A16,2023,ITS-90, 0 
+./Data/corrected_sections/A16\2023_33RO20230413_ctd.nc,A16,2023,ITS-90,"qc = 1 = uncalibrated" 
+./Data/corrected_sections/A16\2023_33RO20230413_ctd.nc,A16,2023,ITS-90, 0 
+./Data/corrected_sections/A20\1997_316N151_3_ctd.nc,A20,1997,ITS-90, 0 
+./Data/corrected_sections/A20\2003_316N200309_ctd.nc,A20,2003,ITS-90, 0 
+./Data/corrected_sections/A20\2012_33AT20120419_ctd.nc,A20,2012,ITS-90, 0 
+./Data/corrected_sections/A20\2021_325020210316_ctd.nc,A20,2021,ITS-90, 0 
+./Data/corrected_sections/A22\1997_316N151_4_ctd.nc,A22,1997,ITS-90, 0 
+./Data/corrected_sections/A22\2003_316N200310_ctd.nc,A22,2003,ITS-90, 0 
+./Data/corrected_sections/A22\2012_33AT20120324_ctd.nc,A22,2012,ITS-90, 0 
+./Data/corrected_sections/A22\2021_325020210420_ctd.nc,A22,2021,ITS-90, 0 
+./Data/corrected_sections/I03\1995_316N145_8_ctd.nc,I03,1995,ITS-90, 0 
+./Data/corrected_sections/I03\2003_2004_49NZ200312_5_ctd.nc,I03,2003,ITS-90, 0 
+./Data/corrected_sections/I03\2003_2004_49NZ200312_5_ctd.nc,I03,2004,ITS-90, 0 
+./Data/corrected_sections/I04\1995_316N145_9_ctd.nc,I04,1995,ITS-90, 0 
+./Data/corrected_sections/I04\2003_2004_49NZ200312_5_ctd.nc,I04,2003,ITS-90, 0 
+./Data/corrected_sections/I04\2003_2004_49NZ200312_5_ctd.nc,I04,2004,ITS-90, 0 
+./Data/corrected_sections/I05\1987_74AB29_1_ctd.nc,I05,1987,IPTS-68, 0 
+./Data/corrected_sections/I05\1995_316N145_7_ctd.nc,I05,1995,ITS-90, 0 
+./Data/corrected_sections/I05\1995_316N145_9_ctd.nc,I05,1995,ITS-90, 0 
+./Data/corrected_sections/I05\2000_09FA20000926_ctd.nc,I05,2000,ITS-90,"Shared with I05, I10 and ISSO3, but section_id = [I02], labeled as I05" 
+./Data/corrected_sections/I05\2000_09FA20000926_ctd.nc,I05,2000,ITS-90, 0 
+./Data/corrected_sections/I05\2002_74AB20020301_ctd.nc,I05,2002,IPTS-68, 0 
+./Data/corrected_sections/I05\2009_33RR20090320_ctd.nc,I05,2009,ITS-90, 0 
+./Data/corrected_sections/I05\2023_33RR20230722_ctd.nc,I05,2023,ITS-90, 0 
+./Data/corrected_sections/I06\1993_35MFCIVA_1_ctd.nc,I06,1993,0, 0 
+./Data/corrected_sections/I06\1996_35MF103_1_ctd.nc,I06,1996,0, 0 
+./Data/corrected_sections/I06\2008_33RR20080204_ctd.nc,I06,2008,ITS-90, 0 
+./Data/corrected_sections/I06\2019_325020190403_ctd.nc,I06,2019,ITS-90, 0 
+./Data/corrected_sections/I08\1994_1995_316N145_5_ctd.nc,I08,1994,ITS-90, 0 
+./Data/corrected_sections/I08\1994_1995_316N145_5_ctd.nc,I08,1995,ITS-90, 0 
+./Data/corrected_sections/I08\1995_316N145_7_ctd.nc,I08,1995,ITS-90, 0 
+./Data/corrected_sections/I08\2003_09AR20030103_ctd.nc,I08,2003,0, 0 
+./Data/corrected_sections/I08\2007_33RR20070204_ctd.nc,I08,2007,ITS-90, 0 
+./Data/corrected_sections/I08\2016_33RR20160208_ctd.nc,I08,2016,ITS-90, 0 
+./Data/corrected_sections/I08\2019_49NZ20191205_ctd.nc,I08,2019,ITS-90, 0 
+./Data/corrected_sections/I08\2024_325020240221_ctd.nc,I08,2024,ITS-90, 0 
+./Data/corrected_sections/I09S\1994_1995_316N145_5_ctd.nc,I09S,1994,ITS-90, 0 
+./Data/corrected_sections/I09S\1994_1995_316N145_5_ctd.nc,I09S,1995,ITS-90, 0 
+./Data/corrected_sections/I09S\2004_2005_09AR20041223_ctd.nc,I09S,2004,ITS-90, 0 
+./Data/corrected_sections/I09S\2004_2005_09AR20041223_ctd.nc,I09S,2005,ITS-90, 0 
+./Data/corrected_sections/I09S\2012_09AR20120105_ctd.nc,I09S,2012,ITS-90, 0 
+./Data/corrected_sections/I09S\2012_49NZ20121128_ctd.nc,I09S,2012,ITS-90, 0 
+./Data/corrected_sections/I09S\2024_096U20240101_ctd.nc,I09S,2024,ITS-90, 0 
+./Data/corrected_sections/P01\1985_31TTTPS47_ctd.nc,P01,1985,ITS-90, 0 
+./Data/corrected_sections/P01\1993_90BM9316_1_ctd.nc,P01,1993,ITS-90, 0 
+./Data/corrected_sections/P01\1999_18DD199905_1_ctd.nc,P01,1999,ITS-90, 0 
+./Data/corrected_sections/P01\1999_49KA199905_1_ctd.nc,P01,1999,ITS-90, 0 
+./Data/corrected_sections/P01\1999_49NZ199905_1_ctd.nc,P01,1999,ITS-90, 0 
+./Data/corrected_sections/P01\2007_49MR0706_1_ctd.nc,P01,2007,ITS-90, 0 
+./Data/corrected_sections/P01\2007_49NZ20070724_ctd.nc,P01,2007,ITS-90, 0 
+./Data/corrected_sections/P01\2011_49UP20110515_ctd.nc,P01,2011,ITS-90, 0 
+./Data/corrected_sections/P01\2014_49NZ20140717_ctd.nc,P01,2014,ITS-90, 0 
+./Data/corrected_sections/P01\2021_49NZ20210713_ctd.nc,P01,2021,ITS-90, 0 
+./Data/corrected_sections/P02\1993_492SSY9310_1_ctd.nc,P02,1993,ITS-90, 0 
+./Data/corrected_sections/P02\1994_492SSY9411_1_ctd.nc,P02,1994,ITS-90, 0 
+./Data/corrected_sections/P02\1994_49EWBO9401_1_ctd.nc,P02,1994,ITS-90, 0 
+./Data/corrected_sections/P02\1994_49K6KY9401_1_ctd.nc,P02,1994,ITS-90, 0 
+./Data/corrected_sections/P02\2004_318M200406_ctd.nc,P02,2004,ITS-90, 0 
+./Data/corrected_sections/P02\2013_318M20130321_ctd.nc,P02,2013,ITS-90, 0 
+./Data/corrected_sections/P02\2022_33RR20220430_ctd.nc,P02,2022,ITS-90, 0 
+./Data/corrected_sections/P02\2022_33RR20220613_ctd.nc,P02,2022,ITS-90, 0 
+./Data/corrected_sections/P03\1985_31TTTPS24_1_ctd.nc,P03,1985,ITS-90, 0 
+./Data/corrected_sections/P03\1985_31TTTPS24_2_ctd.nc,P03,1985,ITS-90, 0 
+./Data/corrected_sections/P03\2005_2006_49NZ20051127_ctd.nc,P03,2005,ITS-90, 0 
+./Data/corrected_sections/P03\2005_2006_49NZ20051127_ctd.nc,P03,2006,ITS-90, 0 
+./Data/corrected_sections/P03\2005_49NZ20051031_ctd.nc,P03,2005,ITS-90, 0 
+./Data/corrected_sections/P03\2013_49UP20130619_ctd.nc,P03,2013,ITS-90, 0 
+./Data/corrected_sections/P03\2021_49UP20210719_2_ctd.nc,P03,2021,ITS-90, 0 
+./Data/corrected_sections/P06\1992_316N138_3_ctd.nc,P06,1992,ITS-90, 0 
+./Data/corrected_sections/P06\1992_316N138_4_ctd.nc,P06,1992,ITS-90, 0 
+./Data/corrected_sections/P06\1992_316N138_5_ctd.nc,P06,1992,ITS-90, 0 
+./Data/corrected_sections/P06\2003_49NZ200308_ctd.nc,P06,2003,ITS-90, 0 
+./Data/corrected_sections/P06\2003_49NZ200309_2_ctd.nc,P06,2003,ITS-90, 0 
+./Data/corrected_sections/P06\2009_318M20091121_ctd.nc,P06,2009,ITS-90, 0 
+./Data/corrected_sections/P06\2010_318M20100105_ctd.nc,P06,2010,ITS-90, 0 
+./Data/corrected_sections/P06\2017_320620170703_ctd.nc,P06,2017,ITS-90, 0 
+./Data/corrected_sections/P06\2017_320620170820_ctd.nc,P06,2017,ITS-90, 0 
+./Data/corrected_sections/P10\1993_3250TN026_1_ctd.nc,P10,1993,ITS-90, 0 
+./Data/corrected_sections/P10\2005_49NZ20050525_ctd.nc,P10,2005,ITS-90, 0 
+./Data/corrected_sections/P10\2011_2012_49NZ20111220_ctd.nc,P10,2011,ITS-90, 0 
+./Data/corrected_sections/P10\2011_2012_49NZ20111220_ctd.nc,P10,2012,ITS-90, 0 
+./Data/corrected_sections/P10\2014_49NZ20140709_ctd.nc,P10,2014,ITS-90, 0 
+./Data/corrected_sections/P10\2014_49UP20140609_ctd.nc,P10,2014,ITS-90, 0 
+./Data/corrected_sections/P14\1992_316N138_7_ctd.nc,P14,1992,ITS-90, 0 
+./Data/corrected_sections/P14\1993_325023_1_ctd.nc,P14,1993,ITS-90, 0 
+./Data/corrected_sections/P14\1996_31DSCG96_1_ctd.nc,P14,1996,ITS-90, 0 
+./Data/corrected_sections/P14\2007_49MR0706_1_ctd.nc,P14,2007,ITS-90, 0 
+./Data/corrected_sections/P14\2007_49NZ20071122_ctd.nc,P14,2007,ITS-90, 0 
+./Data/corrected_sections/P14\2012_49NZ20121128_ctd.nc,P14,2012,ITS-90, 0 
+./Data/corrected_sections/P14\2023_49NZ20231006_ctd.nc,P14,2023,ITS-90, 0 
+./Data/corrected_sections/P15\1990_3175CG90_1_ctd.nc,P15,1990,IPTS-68, 0 
+./Data/corrected_sections/P15\1994_18DD9403_2_ctd.nc,P15,1994,ITS-90, 0 
+./Data/corrected_sections/P15\1996_31DSCG96_1_ctd.nc,P15,1996,ITS-90, 0 
+./Data/corrected_sections/P15\2001_09FA20010524_ctd.nc,P15,2001,ITS-90, 0 
+./Data/corrected_sections/P15\2009_09SS20090203_ctd.nc,P15,2009,ITS-90, 0 
+./Data/corrected_sections/P15\2011_320620110219_ctd.nc,P15,2011,ITS-90, 0 
+./Data/corrected_sections/P15\2016_096U20160426_ctd.nc,P15,2016,ITS-90, 0 
+./Data/corrected_sections/P16\1984_31WTMARAII_ctd.nc,P16,1984,IPTS-68, 0 
+./Data/corrected_sections/P16\1991_31DICGC91_2_ctd.nc,P16,1991,ITS-90, 0 
+./Data/corrected_sections/P16\1991_31WTTUNES_2_ctd.nc,P16,1991,ITS-90, 0 
+./Data/corrected_sections/P16\1991_31WTTUNES_3_ctd.nc,P16,1991,ITS-90, 0 
+./Data/corrected_sections/P16\1992_316N138_9_ctd.nc,P16,1992,ITS-90, 0 
+./Data/corrected_sections/P16\2005_33RR200501_ctd.nc,P16,2005,ITS-90, 0 
+./Data/corrected_sections/P16\2006_325020060213_ctd.nc,P16,2006,ITS-90, 0 
+./Data/corrected_sections/P16\2008_325020080826_ctd.nc,P16,2008,ITS-90, 0 
+./Data/corrected_sections/P16\2011_320620110219_ctd.nc,P16,2011,ITS-90, 0 
+./Data/corrected_sections/P16\2014_320620140320_ctd.nc,P16,2014,ITS-90, 0 
+./Data/corrected_sections/P16\2015_33RO20150410_ctd.nc,P16,2015,ITS-90, 0 
+./Data/corrected_sections/P16\2015_33RO20150525_ctd.nc,P16,2015,ITS-90, 0 
+./Data/corrected_sections/P16\2018_33RR20180918_ctd.nc,P16,2018,ITS-90,"P16, but section_id was wrong" 
+./Data/corrected_sections/P16\2018_33RR20180918_ctd.nc,P16,2018,ITS-90, 0 
+./Data/corrected_sections/P17\1991_31WTTUNES_1_ctd.nc,P17,1991,ITS-90, 0 
+./Data/corrected_sections/P17\1991_31WTTUNES_2_ctd.nc,P17,1991,ITS-90, 0 
+./Data/corrected_sections/P17\1992_1993_316N138_10_ctd.nc,P17,1992,ITS-90, 0 
+./Data/corrected_sections/P17\1992_1993_316N138_10_ctd.nc,P17,1993,ITS-90, 0 
+./Data/corrected_sections/P17\1992_316N138_9_ctd.nc,P17,1992,ITS-90, 0 
+./Data/corrected_sections/P17\1993_325021_1_ctd.nc,P17,1993,ITS-90, 0 
+./Data/corrected_sections/P17\2001_49NZ200107_1_ctd.nc,P17,2001,ITS-90, 0 
+./Data/corrected_sections/P17\2017_49NZ20170208_ctd.nc,P17,2017,ITS-90, 0 
+./Data/corrected_sections/P18\1994_31DSCG94_2_ctd.nc,P18,1994,ITS-90, 0 
+./Data/corrected_sections/P18\2007_2008_33RO20071215_ctd.nc,P18,2007,ITS-90, 0 
+./Data/corrected_sections/P18\2007_2008_33RO20071215_ctd.nc,P18,2008,ITS-90, 0 
+./Data/corrected_sections/P18\2011_320620110219_ctd.nc,P18,2011,ITS-90, 0 
+./Data/corrected_sections/P18\2016_2017_33RO20161119_ctd.nc,P18,2016,ITS-90, 0 
+./Data/corrected_sections/P18\2016_2017_33RO20161119_ctd.nc,P18,2017,ITS-90, 0 
+./Data/corrected_sections/P21\1994_318MWESTW_4_ctd.nc,P21,1994,ITS-90, 0 
+./Data/corrected_sections/P21\2009_49NZ20090410_ctd.nc,P21,2009,ITS-90, 0 
+./Data/corrected_sections/P21\2013_325020131025_ctd.nc,P21,2013,ITS-90,"P21, but section_id was wrong" 
+./Data/corrected_sections/P21\2013_325020131025_ctd.nc,P21,2013,ITS-90, 0 
+./Data/corrected_sections/S04\1990_06MT11_5_ctd.nc,S04,1990,IPTS-68, 0 
+./Data/corrected_sections/S04\1992_06AQANTX_4_ctd.nc,S04,1992,ITS-90, 0 
+./Data/corrected_sections/S04\1992_90KDIOFFE6_1_ctd.nc,S04,1992,ITS-90, 0 
+./Data/corrected_sections/S04\1993_74DI200_1_ctd.nc,S04,1993,ITS-90,"S04, but section_id was wrong" 
+./Data/corrected_sections/S04\1993_74DI200_1_ctd.nc,S04,1993,ITS-90, 0 
+./Data/corrected_sections/S04\1994_1995_09AR9404_1_ctd.nc,S04,1994,0, 0 
+./Data/corrected_sections/S04\1994_1995_09AR9404_1_ctd.nc,S04,1995,0, 0 
+./Data/corrected_sections/S04\1996_06AQANTXIII_4_ctd.nc,S04,1996,0, 0 
+./Data/corrected_sections/S04\1996_320696_3_ctd.nc,S04,1996,ITS-90, 0 
+./Data/corrected_sections/S04\1999_06ANTXVI_2_ctd.nc,S04,1999,ITS-90, 0 
+./Data/corrected_sections/S04\2006_09AR20060102_ctd.nc,S04,2006,ITS-90, 0 
+./Data/corrected_sections/S04\2007_2008_33RO20071215_ctd.nc,S04,2007,ITS-90, 0 
+./Data/corrected_sections/S04\2007_2008_33RO20071215_ctd.nc,S04,2008,ITS-90, 0 
+./Data/corrected_sections/S04\2011_320620110219_ctd.nc,S04,2011,ITS-90, 0 
+./Data/corrected_sections/S04\2012_49NZ20121128_ctd.nc,S04,2012,ITS-90, 0 
+./Data/corrected_sections/S04\2013_49NZ20130106_ctd.nc,S04,2013,ITS-90, 0 
+./Data/corrected_sections/S04\2018_096U20180111_ctd.nc,S04,2018,ITS-90, 0 
+./Data/corrected_sections/S04\2018_2019_490S20181205_ctd.nc,S04,2018,ITS-90,"S04, but section_id was wrong" 
+./Data/corrected_sections/S04\2018_2019_490S20181205_ctd.nc,S04,2019,ITS-90,"S04, but section_id was wrong" 
+./Data/corrected_sections/S04\2018_2019_490S20181205_ctd.nc,S04,2018,ITS-90, 0 
+./Data/corrected_sections/S04\2018_2019_490S20181205_ctd.nc,S04,2019,ITS-90, 0 
+./Data/corrected_sections/S04\2018_320620180309_ctd.nc,S04,2018,ITS-90, 0 
+./Data/corrected_sections/S04\2019_490S20190121_ctd.nc,S04,2019,ITS-90,"S04, but section_id was wrong" 
+./Data/corrected_sections/S04\2019_490S20190121_ctd.nc,S04,2019,ITS-90, 0 
+./Data/corrected_sections/SR03\1991_09AR9101_1_ctd.nc,SR03,1991,0, 0 
+./Data/corrected_sections/SR03\1993_09AR9309_1_ctd.nc,SR03,1993,0,"SR03, but section_id was wrong" 
+./Data/corrected_sections/SR03\1993_09AR9309_1_ctd.nc,SR03,1993,0, 0 
+./Data/corrected_sections/SR03\1994_09AR9407_1_ctd.nc,SR03,1994,0,"SR03, but section_id was wrong" 
+./Data/corrected_sections/SR03\1994_09AR9407_1_ctd.nc,SR03,1994,0, 0 
+./Data/corrected_sections/SR03\1994_1995_09AR9404_1_ctd.nc,SR03,1994,0, 0 
+./Data/corrected_sections/SR03\1994_1995_09AR9404_1_ctd.nc,SR03,1995,0, 0 
+./Data/corrected_sections/SR03\1995_09AR9501_1_ctd.nc,SR03,1995,0, 0 
+./Data/corrected_sections/SR03\1996_09AR9601_1_ctd.nc,SR03,1996,0, 0 
+./Data/corrected_sections/SR03\1996_09AR9604_1_ctd.nc,SR03,1996,0, 0 
+./Data/corrected_sections/SR03\2001_09AR20011029_ctd.nc,SR03,2001,0, 0 
+./Data/corrected_sections/SR03\2007_2008_09AR20071216_ctd.nc,SR03,2007,ITS-90, 0 
+./Data/corrected_sections/SR03\2007_2008_09AR20071216_ctd.nc,SR03,2008,ITS-90, 0 
+./Data/corrected_sections/SR03\2008_09AR20080322_ctd.nc,SR03,2008,ITS-90, 0 
+./Data/corrected_sections/SR03\2011_09AR20110104_ctd.nc,SR03,2011,ITS-90, 0 
+./Data/corrected_sections/SR03\2017_320620170410_ctd.nc,SR03,2017,ITS-90, 0 
+./Data/corrected_sections/SR03\2018_096U20180111_ctd.nc,SR03,2018,ITS-90, 0 

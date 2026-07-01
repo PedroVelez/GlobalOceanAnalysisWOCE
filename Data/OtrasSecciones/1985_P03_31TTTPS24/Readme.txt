@@ -1,0 +1,1 @@
+Estos datos fueron actualizados en junio de 2025 y divididos en dos archivos distintos, por lo que ya no es necesario usar estos datos. Los datos actualizados están disponibles en su respectiva carpeta con direct downloads.

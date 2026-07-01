@@ -90,4 +90,7 @@
 - Tendencias para la comparación con los datos Argo: CalculaTendenciaNivelesArgo.ipynb
     Basicamente este código es una adpatación de CalculaTendenciaNiveles.ipynb pero adaptada para poder comparar con los datos obtenidos de campañas Argo.
     
+<<<<<<< HEAD
 The ./Data folder could be downloaded from [Data](https://www.dropbox.com/scl/fo/c2rgf0rts3gdbln3vguoc/AOXaqKAAbodZWBquJnWwC8E?rlkey=05lhcc19m1lg52xzw4knd4jed&st=of5riz4l&dl=0)
+=======
+>>>>>>> 6c478e8 (adding Data folder)
