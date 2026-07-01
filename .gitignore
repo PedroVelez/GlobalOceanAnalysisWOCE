@@ -6,6 +6,8 @@
 *.log
 *.nc
 *.mat
+*.npy
+*.zip
 *.pdf
 !Presentacion.pdf
 *.pyc
