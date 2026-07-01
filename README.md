@@ -22,13 +22,14 @@
 
     Es importante tener en cuenta que si se descargan nuevos datos hay que revisar sus section_id con Section_Extrator.ipynb, para ver si alguno de los nuevos archivos presenta una peculiaridad y en su caso, añadir esta peculiaridad al correspondiente diccionario que se encuentra al principio del archivo ReadOriginalData.py.
 
-- Mapa de secciones:
-    - PlotAllSections.py, lee de Data/corrected_sections/  y representa la sección que recorre cada archivo en el mapa una por una con el nombre de su sección y el del archivo, guardándolo en ./plots/'SECTION'. Esta es útil para saber que datos están almacenados de cada archivo.
-    - El archivo PlotOcean.py, lee de Data/corrected_sections/ y representa la sección que recorre cada archivo en el mapa, todas en un mismo mapa, de forma que se puede ver las zonas de las que se tienen dados. Guarda el mapa pintado en ./plots/, bajo el nombre "oceans_sections.png"
+## Mapa de secciones:
 
-- Gráfica de ocupaciones: PlotSectionYears.py
+**PlotAllSectionsTracks.py**, lee de Data/corrected_sections/  y representa la sección que recorre cada archivo en el mapa una por una con el nombre de su sección y el del archivo, guardándolo en ./plots/'SECTION'. Esta es útil para saber que datos están almacenados de cada archivo.
+    
+**PlotOcean.py** lee de Data/corrected_sections/ y representa la sección que recorre cada archivo en el mapa, todas en un mismo mapa, de forma que se puede ver las zonas de las que se tienen dados. Guarda el mapa pintado en ./plots/, bajo el nombre "oceans_sections.png"
 
-    Dibuja la gráfica de ocupaciones a partir de Data/data.csv, extrayendo el año y la sección de forma que se generá una gráfica de puntos. La gráfica obtenida se guarda en ./plots/ bajo el nombre occupations.png
+## Ocupaciones
+**PlotSectionYears.py** Dibuja la gráfica de ocupaciones a partir de Data/data.csv, extrayendo el año y la sección de forma que se generá una gráfica de puntos. La gráfica obtenida se guarda en ./plots/ bajo el nombre occupations.png
 
 
 - Diagramas TS: plotTS.py
