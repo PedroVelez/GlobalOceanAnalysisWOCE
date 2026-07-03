@@ -22,28 +22,26 @@
 
     Es importante tener en cuenta que si se descargan nuevos datos hay que revisar sus section_id con Section_Extrator.ipynb, para ver si alguno de los nuevos archivos presenta una peculiaridad y en su caso, añadir esta peculiaridad al correspondiente diccionario que se encuentra al principio del archivo ReadOriginalData.py.
 
-- Mapa de secciones:
-    - PlotAllSections.py, lee de Data/corrected_sections/  y representa la sección que recorre cada archivo en el mapa una por una con el nombre de su sección y el del archivo, guardándolo en ./plots/'SECTION'. Esta es útil para saber que datos están almacenados de cada archivo.
-    - El archivo PlotOcean.py, lee de Data/corrected_sections/ y representa la sección que recorre cada archivo en el mapa, todas en un mismo mapa, de forma que se puede ver las zonas de las que se tienen dados. Guarda el mapa pintado en ./plots/, bajo el nombre "oceans_sections.png"
+## Mapa de secciones y ocupaciones:
+**PlotAllSectionsTracks.py** lee de Data/corrected_sections/  y representa la sección que recorre cada archivo en el mapa una por una con el nombre de su sección y el del archivo, guardándolo en ./plots/'SECTION'. Esta es útil para saber que datos están almacenados de cada archivo.
 
-- Gráfica de ocupaciones: PlotSectionYears.py
+**PlotOcean.py** lee de Data/corrected_sections/ y representa la sección que recorre cada archivo en el mapa, todas en un mismo mapa, de forma que se puede ver las zonas de las que se tienen dados. Guarda el mapa pintado en ./plots/, bajo el nombre "oceans_sections.png"
 
-    Dibuja la gráfica de ocupaciones a partir de Data/data.csv, extrayendo el año y la sección de forma que se generá una gráfica de puntos. La gráfica obtenida se guarda en ./plots/ bajo el nombre occupations.png
+**PlotSectionYears.py** dibuja la gráfica de **ocupaciones** a partir de Data/data.csv, extrayendo el año y la sección de forma que se generá una gráfica de puntos. La gráfica obtenida se guarda en ./plots/ bajo el nombre occupations.png Existe una version ipynb
 
 
-- Diagramas TS: plotTS.py
+## Diagramas TS: 
 
-    Está función lee los datos de Data/corrected_sections/ y hace un diagrama TS para cada archivo, guardándolo en ./plots/'SECTION' donde section es la sección que le corresponde. Contiene el parámetro raw, que si se le da el valor 'FALSE' representa de forma ordinaria, y si se le da el valor 'TRUE' representa en crudo de forma que es más sencillo identificar anomálias, es un parámetro más ligado al tamaño de los puntos. Estos diagramas se guardan con nombre "raw_TS_NOMBRE_DEL_FICHERO_EN_LA_CARPETA_DE_ENTRADA" si raw = 'TRUE' o igual pero sin el raw en caso de raw = 'FALSE'. También da la opción de indicar que secciones representar, por lo que en caso de solo necesitar representar una única sección, no hay que repetir las demás.
+**plotTS.py** lee los datos de Data/corrected_sections/ y hace un diagrama TS para cada archivo, guardándolo en ./plots/'SECTION' donde section es la sección que le corresponde.  Contiene el parámetro raw, que si se le da el valor 'FALSE' representa de forma ordinaria, ajustando los ejes, y si se le da el valor 'TRUE' representa sin ajuste automatica, de forma que es más sencillo identificar anomálias, es un parámetro ligado al tamaño de los puntos. Los diagramas se guardan con nombre "raw_TS_NOMBRE_DEL_FICHERO_EN_LA_CARPETA_DE_ENTRADA" si raw = 'TRUE' o igual pero sin el raw en caso de raw = 'FALSE'. También da la opción de indicar que secciones representar, por lo que en caso de solo necesitar representar una única sección, no hay que repetir las demás. Existe una version ipynb.
 
-- Versión filtrada: aplicaFiltroHanning.ipynb
+## Filtradoaplica
 
-    Este jupyternotebook lee los datos de Data/corrected_sections/, que ya han sido procesados con ReadOriginalData.py y le aplica un filtro Hanning a las variables de interes. Limpia el archivo para que solo tenga las variables y coordenadas necesarias, ya con el filtro aplicado. Devuelve estos ficheros corregidos en la carpeta Data/corrected_sections_filtrado/ en su correspondiente sección. En el notebook se puede ejecutar una prueba previa con la sección A01, además permite escoger la resolución de los puntos del filtrado. 
+**AplicaFiltroHanning.ipynb** lee los datos de Data/corrected_sections/, que ya han sido procesados con ReadOriginalData.py y le aplica un filtro Hanning a las variables de interes. Limpia el archivo para que solo tenga las variables y coordenadas necesarias, ya con el filtro aplicado. Devuelve estos ficheros corregidos en la carpeta Data/corrected_sections_filtrado/ en su correspondiente sección. En el notebook se puede ejecutar una prueba previa con la sección A01, además permite escoger la resolución de los puntos del filtrado. 
 
-    El procedimiento consiste en crear la curva del filtro hanning para luego hacer una convolución con la variable de interes de forma que está se ajusta a la curva y suaviza los perfiles. Por defecto se usa un filtro con 40 dbar como ancho de kernel y una resolución espacial de 1 m.
+El procedimiento consiste en crear la curva del filtro hanning para luego hacer una convolución con la variable de interes de forma que está se ajusta a la curva y suaviza los perfiles. Por defecto se usa un filtro con 40 dbar como ancho de kernel y una resolución espacial de 1 m.
 
-- Unir todas los datos en una matriz: uneCruises.ipynb.
-
-    Este jupyternotebook lee los datos de Data/corrected_sections_filtrado/, a los que ya se les ha aplicado el filtro Hanning. Guarda en Data/join/ un fichero .nc que contiene todos los datos de todos los archivos. Las variables de este fichero son Temperatura, salinidad, y oxígeno filtrados, además de las densidades y capacidades calorificas a presión constante calculadas. Como coordenas tiene latitud, longitud, fecha y nombre del fichero de origen. Por último como dimensiones tiene N_PROFxN_LEVELS donde N_PROF es la suma de todos los perfiles que habían en los ficheros y N_LEVES va desde 0 hasta el máximo de presión interpolada.
+## Unir sections
+** UneCruises.ipynb** Une todas los datos en una matriz. Lee los datos de Data/corrected_sections_filtrado/, a los que ya se les ha aplicado el filtro Hanning. Guarda en Data/join/ un fichero .nc que contiene todos los datos de todos los archivos. Las variables de este fichero son Temperatura, salinidad, y oxígeno filtrados, además de las densidades y capacidades calorificas a presión constante calculadas. Como coordenas tiene latitud, longitud, fecha y nombre del fichero de origen. Por último como dimensiones tiene N_PROFxN_LEVELS donde N_PROF es la suma de todos los perfiles que habían en los ficheros y N_LEVES va desde 0 hasta el máximo de presión interpolada.
     
 
 - Crear división por cuencas: CreateMask.ipynb
