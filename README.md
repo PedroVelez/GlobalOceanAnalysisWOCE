@@ -11,12 +11,12 @@ En el fichero DatosNuevos2026.txt, se encuentran los archivos descargados que fu
 
 **NewDataComparison.ipynb**, se encuentran dos pequeñas celdas que imprimen el nombre del archivo, el expocode, la fecha de inicio y la de final de la carpeta Data/direct_downloads/ y Data/direct_downloadas_nuevos/ de una misma sección, de forma que se puede comprobar si los ficheros etiquetados como nuevos realmente pertenecen a una campaña nueva.
 
-## Identificar valores qc para posterior filtrado: 
+## Identificar valores qc para posterior filtrado
 
 **QualityControlExtractor.ipynb** usa los datos de Data/direct_downloads/ y crea una lista por secciones de las variables que tienen control de calidad y que valores tienen estos. Sabiendo los distintos valores de control de calidad que tienen las variables en los archivos, se puede escoger un filtrado más apropiado. Se recomienda revisar la documentación: [WOCE CTD Quality Codes](https://exchange-format.readthedocs.io/en/latest/quality.html)
     
 
-## Leer datos y tabla: ReadOriginalData.py
+## Leer datos y tabla
 
 En ./Data/direct_downloads/, están las las descargas crudas de internet ya organizadas por secciones WOCE. Cuando una campaña tenia 'section_id' y se realizaba de manera conjunta en dos o más secciones WOCE se copiaba por duplicado en las carpetas de las secciones. Cuando un campaña no tiene 'section_id' se copia solamente en una carpeta, la que más se asemeja a la sección correspondiente.
 
@@ -50,14 +50,13 @@ El procedimiento consiste en crear la curva del filtro hanning para luego hacer 
 **UneCruises.ipynb** Une todas los datos en una matriz. Lee los datos de Data/corrected_sections_filtrado/, a los que ya se les ha aplicado el filtro Hanning. Guarda en Data/join/ un fichero .nc que contiene todos los datos de todos los archivos. Las variables de este fichero son Temperatura, salinidad, y oxígeno filtrados, además de las densidades y capacidades calorificas a presión constante calculadas. Como coordenas tiene latitud, longitud, fecha y nombre del fichero de origen. Por último como dimensiones tiene N_PROFxN_LEVELS donde N_PROF es la suma de todos los perfiles que habían en los ficheros y N_LEVES va desde 0 hasta el máximo de presión interpolada.
     
 
-## Crear división por cuencas: 
+## Crear división por cuencas
 
 En la carpeta CreaCuencas hay varios códigos en matlab que crean archivos csv, indicando el valor de la máscara para cada pixel del mapa. La división por cuencas usada se extrae de el artículo de Sarah G.Purkey: [Warming of Global Abyssal and Deep Southern Ocean Waters between the 1990s and 2000s: Contributions to Global Heat Content and Sea Level Rise Budgets](https://journals.ametsoc.org/view/journals/clim/23/23/2010jcli3682.1.xml?tab_body=pdf)
 
 **CreateMask.ipynb** crea dicha máscara devolviendo un archivo netcdf en Data/Mascara/mascara.nc, que contiene el valor de cuenca asociado a cada pixel y el nombre
 
-
-## Calcula Matriz de ocupaciones: grid.ipynb
+## Calcula Matriz de ocupaciones
 
 **GridOccupation.ipynb** lee los datos de Data/join/total_filt.nc y devuelve un archivo con el nombre occupation.nc en la carpeta Data/grid/. 
 La idea es crear un grid de latitudes y longitudes de resolución ajustable, de forma que para cada pixel del mapa se pueda ver el número de ocupaciones para ese punto, y además que perfiles del archivo total_filt.nc son los que contiene. De esta forma las dimensiones son de $latitud \times longitud \times n_{prof}$, donde $n_{prof}$ es el número máximo de ocupaciones que se esperan para cualquier pixel, es decir, cada punto tendrá un n inferior a $n_{prof}$. 
@@ -68,17 +67,17 @@ Este mismo notebook también representa las ocupaciones por cada punto del grid 
 
 __Nota__: La función Locate.py es usada en estos script
 
-## Tendencias y mapas:
+## Tendencias y mapas
 
 **CalculaTendencias.ipynb* extrae el grid de la resolución deseada de /Data/grid/ y los datos de temperatura y salinidad de /Data/join/total_filt.nc. Con estos archivos calcula la tendencia en los pixeles donde hayan valores suficientes como para calcular la misma. El criterio es que dicho pixel contenga al menos 3 datos de temperatura y que estos tengan una separación temporal de al menos 2.5 años, aunque esto último puede variar si se desea, por ejemplo para 1990-2025 se suele usar 10 años en su lugar. Guarda un fichero del mismo tipo que el grid, pero con la variable tendencia añadida en /Data/tendency/, indicando años en los que se ha filtrado, niveles y resolución. También guarda mapas en /plots/Tendency_grids/ que permiten ver las tendencias en los puntos en los que existen permitiendo ver si los resultados son buenos.
 
 Tras varias pruebas, se decidio añadir una variable que indica si se quiere usar el método de ajuste de Theil Slopes o el ajuste por mínimos cuadrados usual de polyfit. Theil Slopes toma la mediana de las pendientes de todos los pares de puntos, por lo que en algunos casos será más robusta estadísticamente, ya que da la sensación de que ignora datos atípicos. 
-    
+
 Hay unas breves líneas de código que sirven para la representación de puntos de la distribución de puntos de tendencia por cuencas, de forma que se puede ver si estas se agrupan sobre un valor, o por el contrario las desviaciones dan lugar a poca significancia estadística.
 
 **MapasTendencias.ipynb** lee los datos de /Data/tendency/ y calcula la media y desviación de la tendencia por cuencas, de forma que se representan estas variables en un mapa. Este mapa se guarda en plots/Mapas_Tendencias/ indicando los datos necesarios para entender sus características. Permite decidir si representar la media calculada con Theil Slopes o polyfit, además de si se usa la media usual o la mediana para la media por cuencas
 
-### Tendencias por niveles: CalculaTendenciaNiveles.ipynb y MapasTendenciasNiveles.ipynb
+### Tendencias por niveles
 
 **CalculaTendenciaNiveles.ipynb** lee los datos de /Data/grid/ y /Data/join/total_filt.nc y calcula la tendencia en los pixeles donde hayan valores suficientes como para calcular la misma. En principio el criterio es que dicho pixel contenga al menos 3 datos de temperatura y que estos tengan una separación temporal de al menos 2.5 años en el caso de datos entre 1990-2010. En el caso de 1990_2025 se suele usar 10 años en su lugar. Permite escoger si se quiere usar el método de Theil Slopes o polifyt. También hay una descripción de características importantes a tener en cuenta sobre cada método.
     
@@ -100,4 +99,3 @@ Guarda un fichero del mismo tipo que el grid, pero con la variable tendencia añ
 ### Global
 
 **TotalHeatFlux.ipynb** calcula el flujo de calor global leyendo los datos de /Data/Heat_flux/. Devuelve un fichero csv que contiene información sobre el flujo de calor global, así como por cuencas y hemisferios e indicando los métodos resoluciones y fechas usadas.
-
