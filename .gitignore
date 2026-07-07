@@ -11,6 +11,8 @@
 *.npy
 *.zip
 *.pdf
+*.png
+*.jpg
 !Presentacion.pdf
 *.pyc
 *pycache*

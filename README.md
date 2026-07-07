@@ -1,15 +1,15 @@
 
 ## Identificar sección de los datos crudos
 
-**GetSectionFiles.py** , analiza la carpeta .Data/direct_downloads cuando está estaba sin clasificar los archivos por secciones. Devuelve el listado de ficheros y secciones asociadas, cuando las hay, pues en algunas ocasiones no existe 'section_id'
+**GetSectionFiles.py** , analiza la carpeta ./Data/direct_downloads cuando está estaba sin clasificar los archivos por secciones. Devuelve el listado de ficheros y secciones asociadas, cuando las hay, pues en algunas ocasiones no existe 'section_id'
     
 **SectionExtractor.py**, lee de .Data/direct_downloads  da una lista de las variables section_id de cada archivo, lo que permite identificar problemas. De esta forma se tiene en cuenta todos los posibles errores que puedan llevar a perdidas de datos por el camino.
 
 ## Datos nuevos
 
-En el fichero DatosNuevos2026.txt, se encontrarán los archivos descargados que fueron añadidos en marzo de 2026.
+En el fichero DatosNuevos2026.txt, se encuentran los archivos descargados que fueron añadidos en marzo de 2026.
 
-El notebook NewDataComparison.ipynb, se encuentran dos pequeñas celdas que imprimen el nombre del archivo, el expocode, la fecha de inicio y la de final de la carpeta Data/direct_downloads/ y Data/direct_downloadas_nuevos/ de una misma sección, de forma que se puede comprobar si los ficheros etiquetados como nuevos realmente pertenecen a una campaña nueva.
+**NewDataComparison.ipynb**, se encuentran dos pequeñas celdas que imprimen el nombre del archivo, el expocode, la fecha de inicio y la de final de la carpeta Data/direct_downloads/ y Data/direct_downloadas_nuevos/ de una misma sección, de forma que se puede comprobar si los ficheros etiquetados como nuevos realmente pertenecen a una campaña nueva.
 
 ## Identificar valores qc para posterior filtrado: 
 
@@ -28,11 +28,11 @@ Es importante tener en cuenta que si se descargan nuevos datos hay que revisar s
 
 ## Mapa de secciones y ocupaciones
 
-**PlotAllSectionsTracks.py** lee de Data/corrected_sections/  y representa la sección que recorre cada archivo en el mapa una por una con el nombre de su sección y el del archivo, guardándolo en ./plots/'SECTION'. Esta es útil para saber que datos están almacenados de cada archivo.
+**PlotAllSectionsTracks.ipynb** lee de ./Data/corrected_sections/  y representa la sección que recorre cada archivo en el mapa una por una con el nombre de su sección y el del archivo, guardándolo en ./Data/corrected_sections_plots/'SECTION'. Esta es útil para saber que datos están almacenados de cada archivo.
 
-**PlotOcean.py** lee de Data/corrected_sections/ y representa la sección que recorre cada archivo en el mapa, todas en un mismo mapa, de forma que se puede ver las zonas de las que se tienen dados. Guarda el mapa pintado en ./plots/, bajo el nombre "oceans_sections.png"
+**PlotOcean.ipynb** lee de ./Data/corrected_sections/ y representa la sección que recorre cada archivo en el mapa, todas en un mismo mapa, de forma que se puede ver las zonas de las que se tienen dados. Guarda el mapa pintado en ./Data/oceanSections.png
 
-**PlotSectionYears.py** dibuja la gráfica de **ocupaciones** a partir de Data/data.csv, extrayendo el año y la sección de forma que se generá una gráfica de puntos. La gráfica obtenida se guarda en ./plots/ bajo el nombre occupations.png Existe una version ipynb
+**PlotOcupations.ipynb** dibuja la gráfica de **ocupaciones** a partir de ./Data/data.csv, extrayendo el año y la sección de forma que se generá una gráfica de puntos. La gráfica obtenida se guarda en ./Data/ bajo el nombre oceanOcupations.png
 
 
 ## Diagramas TS
