@@ -3,7 +3,7 @@
 
 **GetSectionFiles.py** , analiza la carpeta ./Data/direct_downloads cuando está estaba sin clasificar los archivos por secciones. Devuelve el listado de ficheros y secciones asociadas, cuando las hay, pues en algunas ocasiones no existe 'section_id'
     
-**SectionExtractor.py**, lee de .Data/direct_downloads  da una lista de las variables section_id de cada archivo, lo que permite identificar problemas. De esta forma se tiene en cuenta todos los posibles errores que puedan llevar a perdidas de datos por el camino.
+**SectionExtractor.ipynb**, lee de .Data/direct_downloads  da una lista de las variables section_id de cada archivo, lo que permite identificar problemas. De esta forma se tiene en cuenta todos los posibles errores que puedan llevar a perdidas de datos por el camino.
 
 ## Datos nuevos
 
@@ -18,7 +18,7 @@ En el fichero DatosNuevos2026.txt, se encuentran los archivos descargados que fu
 
 ## Leer datos y tabla: ReadOriginalData.py
 
-En ./Data/direct_downloads/, están las las descargas crudas de internet ya organizadas por secciones WOCE. Cuando una campaña tenia 'section_id' y se realizaba de manera conjunta en dos o más secciones WOCE se copiaba por duplicado en las carpetas de las secciones.  Cuando un campaña no tiene 'section_id' se copia solamente en una carpeta, la que más se asemeja a la sección correspondiente.
+En ./Data/direct_downloads/, están las las descargas crudas de internet ya organizadas por secciones WOCE. Cuando una campaña tenia 'section_id' y se realizaba de manera conjunta en dos o más secciones WOCE se copiaba por duplicado en las carpetas de las secciones. Cuando un campaña no tiene 'section_id' se copia solamente en una carpeta, la que más se asemeja a la sección correspondiente.
 
 **ReadOriginalData.py** contiene la función correct_sections() que 'corrige' las secciones. Está función emplea la variable 'section_id' (cuando existe) de los archivos netcdf para su clasificación por secciones. Los valores de latitud y longitud que no pertenezcan a secciones de interés son recortados, dejando únicamente los datos de secciones puras. Con respecto a las variables aplica un filtro de control de calidad con etiqueta 2 (Buenas calidad) y en su defecto 1 (Sin calibrar) o 0 (no asociado) para usar solo medidas eficientes. Además, de entre todos los posibles nombres de salinidad, se queda con el que corresponde y recorta para que los datos de salinidad estén solo entre 30 y 40 en sus respectivas unidades. Si existe la variable 'ctd_temperature-68' la convierte a grados celsius dividiendo entre 1.00024.
 
