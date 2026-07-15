@@ -1,9 +1,8 @@
+## Identify the section of the raw data
 
-## Identificar sección de los datos crudos
+**GetSectionFiles.py** analyzes the `./Data/direct_downloads` folder when the downloaded files have not yet been organized by section. It returns a list of files and their associated sections, when available, since some files do not contain a `section_id`.
 
-**GetSectionFiles.py** , analiza la carpeta ./Data/direct_downloads cuando está estaba sin clasificar los archivos por secciones. Devuelve el listado de ficheros y secciones asociadas, cuando las hay, pues en algunas ocasiones no existe 'section_id'
-    
-**SectionExtractor.ipynb**, lee de .Data/direct_downloads  da una lista de las variables section_id de cada archivo, lo que permite identificar problemas. De esta forma se tiene en cuenta todos los posibles errores que puedan llevar a perdidas de datos por el camino.
+**SectionExtractor.ipynb** reads the files in `./Data/direct_downloads` and extracts the `section_id` variable from each file, making it possible to identify inconsistencies. This ensures that all potential issues that could lead to data loss during processing are detected.
 
 ## Datos nuevos
 
@@ -99,3 +98,160 @@ Guarda un fichero del mismo tipo que el grid, pero con la variable tendencia añ
 ### Global
 
 **TotalHeatFlux.ipynb** calcula el flujo de calor global leyendo los datos de /Data/Heat_flux/. Devuelve un fichero csv que contiene información sobre el flujo de calor global, así como por cuencas y hemisferios e indicando los métodos resoluciones y fechas usadas.
+
+
+
+---Ingles---
+# New data
+
+The file `DatosNuevos2026.txt` lists the files downloaded and added in March 2026.
+
+**NewDataComparison.ipynb** contains two simple cells that print the filename, expocode, start date, and end date of matching files from `Data/direct_downloads/` and `Data/direct_downloads_nuevos/`. This makes it possible to verify whether files labeled as new actually belong to a new cruise.
+
+# Identify QC values for later filtering
+
+**QualityControlExtractor.ipynb** reads the data in `Data/direct_downloads/` and generates, for each section, a list of variables that include quality control information together with the QC values they contain. Knowing the QC flags used for each variable makes it possible to choose a more appropriate filtering strategy. It is recommended to consult the documentation:
+
+[WOCE CTD Quality Codes](https://exchange-format.readthedocs.io/en/latest/quality.html)
+
+# Read data and generate the metadata table
+
+The `./Data/direct_downloads/` directory contains the original downloads organized by WOCE section. When a cruise includes a `section_id` and spans two or more WOCE sections, the corresponding files are duplicated into each section folder. If a cruise has no `section_id`, it is copied only into the folder corresponding to the section it most closely matches.
+
+**ReadOriginalData.py** contains the `correct_sections()` function, which "corrects" the section assignments. The function uses the `section_id` variable (when available) from the NetCDF files to classify the data by section. Latitude and longitude values outside the target sections are removed, leaving only the data belonging to the desired section.
+
+For the variables, it applies a quality-control filter that prioritizes QC flag **2** (good quality), and if unavailable, QC flag **1** (uncalibrated) or **0** (no QC assigned), ensuring that only valid measurements are retained. Among all possible salinity variable names, it automatically selects the correct one and filters salinity values to the physically meaningful range of 30–40 (in their respective units). If the variable `ctd_temperature-68` exists, it is converted to degrees Celsius by dividing by **1.00024**.
+
+The script also extracts the sampling year from each file and uses it to rename the section files stored in `./Data/corrected_sections/`. In addition, it creates a `data.csv` file containing the filename, section, year, and reference for every cruise.
+
+In the **27/03/2026** version, two dictionaries were added: one containing files with known issues together with explanatory comments, and another listing the different names that may refer to the same WOCE section.
+
+Whenever new data are downloaded, it is important to inspect their `section_id` values using `SectionExtractor.ipynb`. If any new file contains a special case, the corresponding dictionary at the beginning of `ReadOriginalData.py` should be updated accordingly.
+
+# Section maps and occupations
+
+**PlotAllSectionsTracks.ipynb** reads the files in `./Data/corrected_sections/` and plots the track of each individual cruise on a map, labeling it with both the section name and filename. The figures are saved in `./Data/corrected_sections_plots/'SECTION'`. This provides an overview of the spatial coverage of each file.
+
+**PlotOcean.ipynb** reads the files in `./Data/corrected_sections/` and plots all cruise tracks together on a single map, making it possible to visualize the overall spatial coverage of the dataset. The resulting figure is saved as `./Data/oceanSections.png`.
+
+**PlotOccupations.ipynb** generates an **occupation diagram** from `./Data/data.csv`, extracting the sampling year and section to produce a scatter plot of occupations through time. The figure is saved in `./Data/` as `oceanOccupations.png`.
+
+# TS diagrams
+
+**plotTS.py** reads the data in `Data/corrected_sections/` and generates a Temperature–Salinity (TS) diagram for each file, saving the output in `./plots/'SECTION'`, where *SECTION* is the corresponding WOCE section.
+
+The script includes a `raw` parameter. When `raw=False`, the diagram is plotted using automatically adjusted axes. When `raw=True`, no automatic scaling is applied, making anomalies easier to identify. This option is also linked to the point size used in the plot.
+
+The figures are saved as:
+
+- `raw_TS_INPUT_FILENAME` when `raw=True`
+
+- `TS_INPUT_FILENAME` when `raw=False`
+
+The script also allows the user to specify which sections should be plotted, avoiding unnecessary processing of all sections. A notebook version is also available.
+
+# Apply the Hanning filter
+
+**AplicaFiltroHanning.ipynb** reads the processed data from `Data/corrected_sections/` (previously generated by `ReadOriginalData.py`) and applies a Hanning filter to the variables of interest.
+
+The notebook removes unnecessary variables and coordinates, keeping only those required for subsequent analyses, and saves the filtered files in `Data/corrected_sections_filtrado/` under their corresponding section folders.
+
+A preliminary test can be performed using section **A01**, and the spatial resolution used during filtering can be adjusted.
+
+The procedure first constructs the Hanning filter kernel and then convolves it with the selected variable, smoothing the vertical profiles. By default, a kernel width of **40 dbar** and a vertical resolution of **1 m** are used.
+
+# Merge cruises
+
+**UneCruises.ipynb** merges all processed cruises into a single dataset. It reads the filtered data from `Data/corrected_sections_filtrado/` and writes a NetCDF file to `Data/join/` containing all profiles from every cruise.
+
+The dataset includes filtered temperature, salinity, and oxygen, together with derived density and specific heat capacity at constant pressure. The coordinates are latitude, longitude, sampling date, and source filename. The dimensions are `N_PROF × N_LEVELS`, where `N_PROF` is the total number of profiles and `N_LEVELS` spans the interpolated pressure levels.
+
+# Create the basin mask
+
+The `CreaCuencas` folder contains several MATLAB scripts that generate CSV files assigning a basin mask value to each map pixel.
+
+The basin division follows Sarah G. Purkey's study:
+
+> *Warming of Global Abyssal and Deep Southern Ocean Waters between the 1990s and 2000s: Contributions to Global Heat Content and Sea Level Rise Budgets.*
+
+**CreateMask.ipynb** generates this basin mask and stores it as `Data/Mascara/mascara.nc`, containing the basin identifier and basin name associated with every pixel.
+
+# Compute the occupation grid
+
+**GridOccupation.ipynb** reads `Data/join/total_filt.nc` and creates `occupation.nc` in `Data/grid/`.
+
+The notebook builds a latitude–longitude grid with user-defined resolution. For each grid cell, it stores the number of occupations and identifies which profiles from `total_filt.nc` fall within that cell.
+
+The resulting dimensions are
+
+$$
+
+\text{latitude} \times \text{longitude} \times n_{\mathrm{prof}}
+
+$$
+
+where $n_{\mathrm{prof}}$ is the maximum number of occupations found in any grid cell.
+
+The notebook also adds the variables `mask` and `basin` (basin name), using the mask generated by `CreaCuencas/CreateMask.ipynb`, so that basin information is directly included in the output file.
+
+Finally, it computes bathymetry and the area of each grid cell (m²).
+
+The notebook also plots the spatial distribution of occupations using a color map. These figures are saved in `/plots/Occupation_grids/`, with filenames indicating the grid resolution.
+
+*Previous implementations of this step are contained in `grid_2025.ipynb` and `grid_2025.grid`. These versions also computed mean temperature and salinity for each profile, although that approach was later discarded.*
+
+**Note:** `Locate.py` is used by these scripts.
+
+# Trends and maps
+
+**CalculaTendencias.ipynb** reads the selected-resolution grid from `/Data/grid/` together with temperature and salinity from `/Data/join/total_filt.nc`. It computes trends only for grid cells containing sufficient data.
+
+By default, a valid grid cell must contain at least three temperature observations spanning at least **2.5 years**, although this threshold can be modified (for example, **10 years** is commonly used for the 1990–2025 period).
+
+The notebook saves an updated grid containing the trend variable in `/Data/tendency/`, with filenames indicating the selected years, depth levels, and spatial resolution. It also generates maps in `/plots/Tendency_grids/` to visualize the spatial distribution of valid trends.
+
+After extensive testing, an option was added to compute trends using either:
+
+- the standard least-squares (`polyfit`) regression, or
+
+- the **Theil–Sen estimator**.
+
+Theil–Sen computes the median slope among all pairs of observations, making it more robust to outliers than ordinary least squares.
+
+The notebook also includes a few lines of code to visualize the distribution of trend values by basin, allowing a qualitative assessment of whether trends cluster around characteristic values or exhibit large variability.
+
+**MapasTendencias.ipynb** reads the files in `/Data/tendency/` and computes the mean and standard deviation of trends for each basin. These statistics are displayed on maps saved in `plots/Mapas_Tendencias/`.
+
+The notebook allows the user to choose between Theil–Sen and ordinary least-squares trends, and between the arithmetic mean and the median when averaging trends within each basin.
+
+## Trends by depth level
+
+**CalculaTendenciaNiveles.ipynb** computes trends independently at each pressure level using the data in `/Data/grid/` and `/Data/join/total_filt.nc`.
+
+The default criteria require at least three observations separated by at least **2.5 years** for the 1990–2010 period, while **10 years** is typically used for analyses covering 1990–2025.
+
+The notebook allows the user to choose either the Theil–Sen estimator or ordinary least squares (`polyfit`) and includes a discussion of the strengths and limitations of each method.
+
+The resulting files are stored in `/Data/tendency_levels/`, with pressure as the third dimension. Filenames indicate the selected years, pressure range, and spatial resolution.
+
+**MapasTendenciasNiveles.ipynb** reads these files and computes basin-scale mean trends and standard deviations, displaying them on maps stored in `plots/Mapas_Tendencias_Niveles/`. As before, users can choose between Theil–Sen or least-squares trends and between mean or median basin statistics.
+
+## Deep Argo
+
+**CalculaTendenciaNivelesArgo.ipynb** is designed for comparison with Deep Argo observations. It is essentially an adaptation of `CalculaTendenciaNiveles.ipynb` that has been modified to process Deep Argo datasets.
+
+# Heat flux
+
+**HeatFluxVariables.ipynb** adds density, specific heat capacity at constant pressure, grid-cell area, and basin mask to produce a dataset containing all variables required for heat flux calculations.
+
+It reads data from `/Data/grid/`, `/Data/tendency_levels/`, and `total_filt.nc`, and writes a NetCDF dataset to `./Data/Heat_vars/`. As throughout the workflow, filenames encode the processing parameters used.
+
+**MapasHeatFlux.ipynb** reads the datasets in `./Data/Heat_vars/`, computes basin-averaged heat fluxes and their standard deviations, and plots the results in `./plots/Mapas_Heat_Flux/`.
+
+It also saves a dataset containing the mean basin heat fluxes and their standard deviations in `./Data/Heat_flux/`. Again, filenames encode the processing settings.
+
+## Global heat flux
+
+**TotalHeatFlux.ipynb** computes the global heat flux from the datasets stored in `/Data/Heat_flux/`.
+
+The notebook generates a CSV file summarizing the global heat flux, as well as basin-scale and hemispheric heat fluxes, together with the methods, spatial resolutions, and time periods used in the calculations.

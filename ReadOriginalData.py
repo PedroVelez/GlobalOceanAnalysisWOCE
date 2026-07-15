@@ -230,8 +230,7 @@ def correct_sections(
                     vars_, coords, qcs = vars_coords_interest(dataset = ds)
 
                     ds = ds.where(np.isnan(ds.latitude) == False).where(np.isnan(ds.longitude) == False) # Remove nans in latitude and longitude
-                            
-                                
+                                                            
                     for salinity in ["ctd_salinity", "ctd_salinity_unk", "ctd_salinity_68"]:
                         if salinity in vars_:
                             sal = salinity
